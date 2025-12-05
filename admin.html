@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - Eventos York & Katy</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <section id="adminPanel">
+        <h2>Panel de Administración</h2>
+
+        <!-- PUBLICAR NUEVA PUBLICACIÓN -->
+        <h3>Agregar Nueva Publicación</h3>
+        <input type="text" id="pubComentario" placeholder="Comentario de la publicación">
+        <button onclick="guardarPublicacion()">Guardar Publicación</button>
+
+        <hr><br>
+
+        <!-- AGREGAR NUEVO TESTIMONIO -->
+        <h3>Agregar Testimonio Manualmente</h3>
+        <input type="text" id="testNombre" placeholder="Nombre del cliente">
+        <textarea id="testTexto" placeholder="Testimonio"></textarea>
+        <input type="number" id="testEstrellas" placeholder="Estrellas (1-5)" min="1" max="5">
+        <button onclick="guardarTestimonioAdmin()">Guardar Testimonio</button>
+
+        <br><br>
+
+        <button onclick="salirAdmin()">Cerrar Sesión</button>
+    </section>
+
+    <!-- FIREBASE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { 
+            getFirestore, collection, addDoc 
+        } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+        import { getAuth, signOut } 
+        from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCTHFlgEOEBXThDzdTRvk_0BwLjaTwRc7E",
+            authDomain: "striped-smile-475414-v0.firebaseapp.com",
+            projectId: "striped-smile-475414-v0",
+            storageBucket: "striped-smile-475414-v0.firebasestorage.app",
+            messagingSenderId: "354814109895",
+            appId: "1:354814109895:web:0fce975ddb6c180f1df6e2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+
+        /* ======================== */
+        /* GUARDAR PUBLICACIÓN      */
+        /* ======================== */
+        async function guardarPublicacion() {
+            const comentario = document.getElementById("pubComentario").value;
+
+            if (!comentario) {
+                alert("Escribe un comentario");
+                return;
+            }
+
+            await addDoc(collection(db, "publicaciones"), {
+                comentario: comentario,
+                fecha: new Date().toISOString()
+            });
+
+            alert("Publicación agregada");
+            document.getElementById("pubComentario").value = "";
+        }
+
+
+        /* ======================== */
+        /* GUARDAR TESTIMONIO ADMIN */
+        /* ======================== */
+        async function guardarTestimonioAdmin() {
+            const nombre = document.getElementById("testNombre").value;
+            const texto = document.getElementById("testTexto").value;
+            const estrellas = document.getElementById("testEstrellas").value;
+
+            if (!nombre || !texto || !estrellas) {
+                alert("Completa todos los campos");
+                return;
+            }
+
+            await addDoc(collection(db, "testimonios"), {
+                nombre: nombre,
+                texto: texto,
+                estrellas: parseInt(estrellas),
+                fecha: new Date().toISOString()
+            });
+
+            alert("Testimonio guardado");
+            document.getElementById("testNombre").value = "";
+            document.getElementById("testTexto").value = "";
+            document.getElementById("testEstrellas").value = "";
+        }
+
+
+        /* ======================== */
+        /* CERRAR SESIÓN            */
+        /* ======================== */
+        function salirAdmin() {
+            signOut(auth).then(() => {
+                alert("Sesión cerrada");
+                window.location.href = "index.html";
+            });
+        }
+    </script>
+
+</body>
+</html>

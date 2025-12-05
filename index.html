@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos York & Katy</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="assets/logo.png" type="image/png">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <img src="assets/logo.png" class="logo" id="adminTrigger">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#eventos">Eventos</a></li> <!-- 🔥 NUEVO BOTÓN -->
+                <li><a href="#galeria">Publicaciones</a></li>
+                <li><a href="#carta">Carta de Comida</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+        <div class="hero-content fade-up">
+            <h1>Eventos York & Katy</h1>
+            <p>Creamos momentos inolvidables para tu celebración</p>
+            <a href="#contacto" class="btn">Reservar ahora</a>
+        </div>
+    </section>
+
+    <!-- ZONA CON FONDO -->
+    <div class="section-bg">
+
+        <!-- SERVICIOS -->
+        <section id="servicios" class="servicios">
+            <h2 class="fade-up">Nuestros Servicios</h2>
+
+            <div class="servicios-grid">
+                <div class="servicio-card fade-up">Organización de Eventos</div>
+                <div class="servicio-card fade-up">Decoración</div>
+                <div class="servicio-card fade-up">Catering</div>
+                <div class="servicio-card fade-up">Música & DJ</div>
+                <div class="servicio-card fade-up">Fotografía</div>
+                <div class="servicio-card fade-up">Diseño Personalizado</div>
+            </div>
+        </section>
+
+        <!-- 🔥 NUEVA SECCIÓN TIPOS DE EVENTOS -->
+        <section id="eventos" class="event-types-section fade-up">
+            <h2>Tipos de Eventos</h2>
+            <p class="event-subtitle">
+                En <strong>Eventos York & Katy</strong> organizamos mucho más que bodas.
+                Atendemos eventos sociales, corporativos y celebraciones especiales para que tu día sea inolvidable.
+            </p>
+
+            <div class="event-types-container">
+
+                <div class="event-card">
+                    <span class="event-icon">🎉</span>
+                    <h3>Eventos Sociales</h3>
+                    <p>Cumpleaños, bodas, bautizos, comuniones, aniversarios y celebraciones familiares.</p>
+                </div>
+
+                <div class="event-card">
+                    <span class="event-icon">🏢</span>
+                    <h3>Eventos Corporativos</h3>
+                    <p>Reuniones, conferencias, lanzamientos, presentaciones y fiestas de empresa.</p>
+                </div>
+
+                <div class="event-card">
+                    <span class="event-icon">🍸</span>
+                    <h3>Cocteles & Galas</h3>
+                    <p>Cocteles elegantes, cenas formales, eventos VIP y recepciones especiales.</p>
+                </div>
+
+                <div class="event-card">
+                    <span class="event-icon">🎓</span>
+                    <h3>Eventos Académicos</h3>
+                    <p>Graduaciones, ceremonias escolares y celebraciones estudiantiles.</p>
+                </div>
+
+                <div class="event-card">
+                    <span class="event-icon">🎪</span>
+                    <h3>Eventos Personalizados</h3>
+                    <p>Eventos temáticos, al aire libre, festivales y experiencias a tu medida.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PUBLICACIONES -->
+        <section id="galeria" class="galeria">
+            <h2 class="fade-up">Publicaciones</h2>
+
+            <div id="galeria-grid" class="galeria-grid"></div>
+        </section>
+
+        <!-- CARTA DE COMIDA -->
+        <section id="carta" class="carta">
+            <h2 class="fade-up">Carta de Comida</h2>
+
+            <div class="carta-grid fade-up">
+
+                <div class="carta-item"><img src="assets/presentacion.png" class="carta-img"><h3>Menú de la Casa</h3><p>Presentación general de nuestras especialidades.</p></div>
+                <div class="carta-item"><img src="assets/entrantes.png" class="carta-img"><h3>Entrantes</h3><p>Aperitivos fríos y calientes.</p></div>
+                <div class="carta-item"><img src="assets/ensaladas.png" class="carta-img"><h3>Ensaladas</h3><p>Opciones frescas y ligeras.</p></div>
+                <div class="carta-item"><img src="assets/pollo.png" class="carta-img"><h3>Pollo</h3><p>Con salsa, empanizado o BBQ.</p></div>
+                <div class="carta-item"><img src="assets/cerdo.png" class="carta-img"><h3>Cerdo</h3><p>Preparación tradicional o gourmet.</p></div>
+                <div class="carta-item"><img src="assets/ternera.png" class="carta-img"><h3>Ternera</h3><p>Cortes premium de alta cocina.</p></div>
+                <div class="carta-item"><img src="assets/pescado.png" class="carta-img"><h3>Pescado</h3><p>Frescura máxima en cada preparación.</p></div>
+                <div class="carta-item"><img src="assets/marisco.png" class="carta-img"><h3>Mariscos</h3><p>Elegantes opciones del mar.</p></div>
+                <div class="carta-item"><img src="assets/vegano_celiacos.png" class="carta-img"><h3>Vegano / Celíacos</h3><p>Adaptado a todas las necesidades.</p></div>
+                <div class="carta-item"><img src="assets/pasteles.png" class="carta-img"><h3>Pasteles</h3><p>Postres que complementan tu evento.</p></div>
+                <div class="carta-item"><img src="assets/bebidas.png" class="carta-img"><h3>Bebidas</h3><p>Jugos y refrescos.</p></div>
+                <div class="carta-item"><img src="assets/alcohol.png" class="carta-img"><h3>Bebidas Alcohólicas</h3><p>Licores y cócteles premium.</p></div>
+
+            </div>
+        </section>
+
+        <!-- TESTIMONIOS -->
+        <section id="testimonios" class="testimonios">
+            <h2 class="fade-up">Testimonios</h2>
+
+            <div class="formulario-testimonio fade-up">
+                <h3>Escribe tu experiencia</h3>
+
+                <input type="text" id="nombre" placeholder="Tu nombre" required>
+                <textarea id="texto" placeholder="Tu testimonio" required></textarea>
+
+                <select id="estrellas">
+                    <option value="5">⭐⭐⭐⭐⭐ (5 estrellas)</option>
+                    <option value="4">⭐⭐⭐⭐ (4 estrellas)</option>
+                    <option value="3">⭐⭐⭐ (3 estrellas)</option>
+                </select>
+
+                <button onclick="guardarTestimonio()" class="btn">Enviar testimonio</button>
+            </div>
+
+            <div id="testimonios-grid" class="testimonios-grid"></div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contacto" class="contacto">
+            <h2 class="fade-up">Reserva tu Evento</h2>
+
+            <p class="fade-up info-contacto"><strong>WhatsApp:</strong> +34 666 03 09 23</p>
+            <p class="fade-up info-contacto"><strong>Email España:</strong> mquintana2111@gmail.com</p>
+            <p class="fade-up info-contacto"><strong>Email Nicaragua:</strong> yorkat@gmail.com</p>
+            <p class="fade-up info-contacto">📍 Mallorca, España</p>
+            <p class="fade-up info-contacto">📍 León, Nicaragua</p>
+
+            <a href="https://wa.me/34666030923" target="_blank" class="btn fade-up">Contactar por WhatsApp</a>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Eventos York & Katy | Todos los derechos reservados</p>
+    </footer>
+
+    <!-- ADMIN JS -->
+    <script src="admin.js"></script>
+
+    <!-- FIREBASE -->
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { 
+            getFirestore, collection, getDocs, addDoc 
+        } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+        import { getAuth, signInWithEmailAndPassword } 
+        from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCTHFlgEOEBXThDzdTRvk_0BwLjaTwRc7E",
+            authDomain: "striped-smile-475414-v0.firebaseapp.com",
+            projectId: "striped-smile-475414-v0",
+            storageBucket: "striped-smile-475414-v0.firebasestorage.app",
+            messagingSenderId: "354814109895",
+            appId: "1:354814109895:web:0fce975ddb6c180f1df6e2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        /* Cargar publicaciones */
+        async function cargarPublicaciones() {
+            const cont = document.getElementById("galeria-grid");
+            cont.innerHTML = "";
+
+            const querySnapshot = await getDocs(collection(db, "publicaciones"));
+            querySnapshot.forEach((doc) => {
+                const d = doc.data();
+
+                cont.innerHTML += `
+                    <div class="galeria-item fade-up">
+                        <p style="color:white;">${d.comentario}</p>
+                    </div>
+                `;
+            });
+        }
+
+        /* Guardar testimonio */
+        async function guardarTestimonio() {
+            const nombre = document.getElementById("nombre").value;
+            const texto = document.getElementById("texto").value;
+            const estrellas = document.getElementById("estrellas").value;
+
+            if (!nombre || !texto) {
+                alert("Completa todos los campos");
+                return;
+            }
+
+            await addDoc(collection(db, "testimonios"), {
+                nombre: nombre,
+                texto: texto,
+                estrellas: parseInt(estrellas),
+                fecha: new Date().toISOString()
+            });
+
+            alert("¡Gracias por tu testimonio!");
+
+            document.getElementById("nombre").value = "";
+            document.getElementById("texto").value = "";
+
+            cargarTestimonios();
+        }
+
+        /* Cargar testimonios */
+        async function cargarTestimonios() {
+            const cont = document.getElementById("testimonios-grid");
+            cont.innerHTML = "";
+
+            const querySnapshot = await getDocs(collection(db, "testimonios"));
+            querySnapshot.forEach((doc) => {
+                const d = doc.data();
+
+                cont.innerHTML += `
+                    <div class="testimonio-card fade-up">
+                        <h4 style="color:white;">${d.nombre}</h4>
+                        <p style="color:white;">“${d.texto}”</p>
+                        <p class="estrellas">⭐ ${d.estrellas}</p>
+                    </div>
+                `;
+            });
+        }
+
+        /* ADMIN LOGIN */
+        document.getElementById("adminTrigger").addEventListener("click", () => {
+            const email = prompt("Correo administrador:");
+            const pass = prompt("Contraseña:");
+
+            signInWithEmailAndPassword(auth, email, pass)
+                .then(() => {
+                    alert("Bienvenido administrador");
+                    window.location.href = "admin.html";
+                })
+                .catch(() => alert("Acceso denegado"));
+        });
+
+        cargarPublicaciones();
+        cargarTestimonios();
+
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

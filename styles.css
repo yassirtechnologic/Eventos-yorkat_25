@@ -1,0 +1,467 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Georgia", serif;
+}
+
+body {
+    background: white;
+    color: #333;
+}
+
+/* ======================= */
+/* NAVBAR SLIM ULTRA PRO   */
+/* ======================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: 8px 40px; /* ALTURA MUY REDUCIDA */
+    background: #ff4f9a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px; /* MENOR SEPARACIÓN */
+    z-index: 9999;
+    height: 55px; /* 🔥 ALTURA FIJA, SUPER SLIM */
+}
+
+/* LOGO MAS PEQUEÑO */
+.logo {
+    width: 42px; /* REDUCIDO A LA MITAD */
+    cursor: pointer;
+}
+
+/* LINKS MÁS PEQUEÑOS Y EN UNA LÍNEA */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 24px; /* MENOS ESPACIO ENTRE BOTONES */
+    align-items: center;
+}
+
+.nav-links a {
+    color: white !important;
+    text-decoration: none;
+    font-size: 15px;  /* 🔥 MAS PEQUEÑO */
+    font-weight: 600; /* MAS DELGADO */
+    padding: 4px 6px; /* MENOS ANCHO */
+    border-radius: 4px;
+    transition: 0.25s ease;
+}
+
+.nav-links a:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+/* ======================= */
+/* HERO                    */
+/* ======================= */
+
+.hero {
+    height: 100vh;
+    background-image: url("assets/fondo.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content {
+    background: rgba(0, 0, 0, 0.45);
+    padding: 45px;
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+}
+
+.hero h1 {
+    font-size: 58px;
+}
+
+.hero p {
+    margin-top: 12px;
+    font-size: 23px;
+}
+
+.btn {
+    margin-top: 18px;
+    display: inline-block;
+    padding: 12px 26px;
+    background: #ff7f50;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 20px;
+    box-shadow: 0 0 10px rgba(255, 96, 80, 0.5);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 16px rgba(255, 96, 80, 0.8);
+}
+
+/* ======================= */
+/* SECCIONES GENERALES     */
+/* ======================= */
+
+section {
+    padding: 90px 25px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 42px;
+    margin-bottom: 25px;
+    color: #ff7f50;
+    text-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+
+/* ======================= */
+/* FONDO PARALLAX          */
+/* ======================= */
+
+.section-bg {
+    background-image: url("assets/fondo1.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* ======================= */
+/* SERVICIOS               */
+/* ======================= */
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+}
+
+.servicio-card {
+    padding: 25px;
+    background: rgba(255, 228, 255, 0.7);
+    border: 1px solid #e7bfff;
+    border-radius: 14px;
+    font-size: 22px;
+    transition: 0.4s;
+    backdrop-filter: blur(10px);
+}
+
+.servicio-card:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 15px rgba(255,255,255,0.5);
+}
+
+/* ============================= */
+/* PUBLICACIONES INSTAGRAM PRO   */
+/* ============================= */
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    justify-items: center;
+}
+
+.galeria-item {
+    width: 260px;
+    padding: 20px;
+    border-radius: 14px;
+    background: rgba(0,0,0,0.45);
+    color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    transition: 0.3s;
+}
+
+.galeria-item:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 18px rgba(255,255,255,0.3);
+}
+
+/* ============================= */
+/* CARTA DE COMIDA PRO          */
+/* ============================= */
+
+.carta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+.carta-item {
+    background: rgba(255, 228, 255, 0.8);
+    border: 1px solid #e7bfff;
+    padding: 25px;
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    color: white;
+    text-align: center;
+    transition: 0.35s;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.carta-item:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 22px rgba(255,255,255,0.4);
+}
+
+.carta-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+
+/* ============================= */
+/* TESTIMONIOS PRO              */
+/* ============================= */
+
+.testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+}
+
+.testimonio-card {
+    background: rgba(255, 228, 255, 0.7);
+    border: 1px solid #e7bfff;
+    padding: 28px;
+    border-radius: 14px;
+    font-size: 20px;
+    color: white;
+    backdrop-filter: blur(10px);
+    transition: 0.35s;
+    box-shadow: 0 0 14px rgba(0,0,0,0.35);
+}
+
+.testimonio-card:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 22px rgba(255,255,255,0.45);
+}
+
+.estrellas {
+    font-size: 20px;
+    color: gold;
+    margin-top: 10px;
+}
+
+/* FORMULARIO ELEGANTE */
+
+.formulario-testimonio {
+    background: rgba(255, 255, 255, 0.25);
+    padding: 28px;
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 14px rgba(255,255,255,0.35);
+}
+
+.formulario-testimonio input,
+.formulario-testimonio textarea,
+.formulario-testimonio select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 16px;
+    font-size: 18px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+/* ======================= */
+/* CONTACTO                */
+/* ======================= */
+
+.info-contacto {
+    color: white !important;
+    font-size: 20px;
+    text-shadow: 0 0 6px black;
+}
+
+/* ======================= */
+/* FOOTER                  */
+/* ======================= */
+
+footer {
+    background: #222;
+    color: white;
+    padding: 22px;
+    text-align: center;
+    font-size: 17px;
+}
+
+/* ======================= */
+/* ANIMACIONES             */
+/* ======================= */
+
+.fade-up {
+    opacity: 0;
+    animation: fadeUp 1.4s ease forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ======================= */
+/* MODAL ADMIN             */
+/* ======================= */
+
+#adminModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: rgba(255,255,255,0.15);
+    padding: 35px;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    color: white;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.admin-btn {
+    background: #ff4f9a;
+    color: white;
+    border: none;
+    padding: 14px;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* ============================= */
+/* TIPOS DE EVENTOS (NUEVA SECCIÓN) */
+/* ============================= */
+
+.event-types-section {
+    padding: 90px 25px;
+    text-align: center;
+    color: white;
+    background: linear-gradient(
+                rgba(0,0,0,0.55),
+                rgba(0,0,0,0.55)
+             ),
+             url("assets/fondo1.png"); /* Puedes cambiarlo si quieres otro fondo */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.event-types-section h2 {
+    font-size: 46px;
+    color: #ff7f50;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin-bottom: 15px;
+}
+
+.event-subtitle {
+    color: #ffeaff;
+    font-size: 20px;
+    max-width: 900px;
+    margin: 0 auto 45px;
+    line-height: 1.5;
+}
+
+/* CONTENEDOR TARJETAS */
+.event-types-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+/* TARJETAS DE EVENTOS */
+.event-card {
+    background: rgba(255, 228, 255, 0.75);
+    border: 1px solid #e7bfff;
+    padding: 28px;
+    border-radius: 18px;
+    text-align: center;
+    color: #ffffff;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 14px rgba(0,0,0,0.35);
+    transition: 0.35s ease;
+}
+
+.event-card:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 22px rgba(255,255,255,0.4);
+}
+
+/* ICONOS GRANDES */
+.event-icon {
+    font-size: 50px;
+    margin-bottom: 12px;
+}
+
+/* TITULO DE CADA TARJETA */
+.event-card h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    text-shadow: 0 0 6px rgba(0,0,0,0.5);
+}
+
+/* TEXTO DE CADA TARJETA */
+.event-card p {
+    color: #fff0fa;
+    font-size: 17px;
+}
+
+/* ------------------------------- */
+/*  RESPONSIVE PARA IPHONE / MÓVIL */
+/* ------------------------------- */
+
+@media (max-width: 600px) {
+    .event-types-section h2 {
+        font-size: 36px;
+    }
+
+    .event-subtitle {
+        font-size: 17px;
+        padding: 0 10px;
+    }
+
+    .event-card {
+        padding: 22px;
+    }
+
+    .event-card h3 {
+        font-size: 20px;
+    }
+}
+
+
+
+
+
+
