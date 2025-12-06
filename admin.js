@@ -16,7 +16,7 @@ import {
    FIREBASE CONFIG
 ========================================================== */
 const firebaseConfig = {
-    apiKey: "AIzaSyCTHFlgEOEBXThDzdTRvk_0BwLjaTwRc7E",
+    apiKey: "AIzaSyB_GFvlW4hrZ1fTAz8kB-6dybi83jVRmaQ",
     authDomain: "striped-smile-475414-v0.firebaseapp.com",
     projectId: "striped-smile-475414-v0",
     storageBucket: "striped-smile-475414-v0.appspot.com",
