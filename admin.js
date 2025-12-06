@@ -1,7 +1,6 @@
-/* ================================
-   IMPORTAR FIREBASE
-================================ */
-
+/* ==========================================================
+   FIREBASE IMPORTS
+========================================================== */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 
 import { 
@@ -13,7 +12,9 @@ import {
     doc 
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-/* CONFIG FIREBASE */
+/* ==========================================================
+   FIREBASE CONFIG
+========================================================== */
 const firebaseConfig = {
     apiKey: "AIzaSyCTHFlgEOEBXThDzdTRvk_0BwLjaTwRc7E",
     authDomain: "striped-smile-475414-v0.firebaseapp.com",
@@ -23,198 +24,170 @@ const firebaseConfig = {
     appId: "1:354814109895:web:0fce975ddb6c180f1df6e2"
 };
 
-// Inicializar app y BD
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
-/* ================================
-   SISTEMA ADMIN OCULTO
-================================ */
-
+/* ==========================================================
+   ABRIR PANEL ADMIN DESDE index.html (CON CLAVE SECRETA)
+========================================================== */
 const adminTrigger = document.getElementById("adminTrigger");
 
-const adminModal = document.createElement("div");
-adminModal.id = "adminModal";
-adminModal.innerHTML = `
-    <div class="modal-content">
-        <h2>Modo Administrador</h2>
-        <p>Ingresa la clave:</p>
-        <input type="password" id="adminPassword" placeholder="Clave...">
-        <button class="admin-btn" id="enterAdmin">Entrar</button>
-    </div>
-`;
-document.body.appendChild(adminModal);
+if (adminTrigger) {
+    adminTrigger.onclick = () => {
+        const clave = prompt("Ingrese la clave de administrador:");
 
-adminTrigger.onclick = () => adminModal.style.display = "flex";
-adminModal.onclick = (e) => { if (e.target === adminModal) adminModal.style.display = "none"; };
-
-document.addEventListener("click", () => {
-    const btn = document.getElementById("enterAdmin");
-    if (!btn) return;
-
-    btn.onclick = () => {
-        const pass = document.getElementById("adminPassword").value;
-
-        if (pass === "yorkat_admin_25") {
-            adminModal.style.display = "none";
-            showAdminPanel();
+        if (clave === "yorkat_admin_25") {
+            window.location.href = "admin.html";
         } else {
             alert("Clave incorrecta");
         }
     };
-});
-
-
-/* ================================
-   PANEL ADMIN (ACTUALIZADO)
-================================ */
-
-const adminPanel = document.createElement("div");
-adminPanel.id = "adminPanel";
-adminPanel.innerHTML = `
-    <h2>Panel del Administrador</h2>
-
-    <p><strong>Subir nueva publicación</strong></p>
-    <input type="file" id="imgInput">
-    <textarea id="comentarioInput" placeholder="Comentario..."></textarea>
-    <button id="guardarPublicacion">Guardar publicación</button>
-
-    <br><br><hr><br>
-
-    <p><strong>Agregar Testimonio</strong></p>
-    <textarea id="testimonioInput" placeholder="Escribe un testimonio..."></textarea>
-    <button id="guardarTestimonio">Guardar testimonio</button>
-`;
-document.body.appendChild(adminPanel);
-
-function showAdminPanel() {
-    adminPanel.style.display = "block";
 }
 
+/* ==========================================================
+   FUNCIONES PARA admin.html
+========================================================== */
 
-/* ================================
-   GUARDAR PUBLICACIÓN EN FIRESTORE
-================================ */
+/* ===========================
+   1. GUARDAR PUBLICACIÓN
+=========================== */
+export async function guardarPublicacion() {
+    const comentario = document.getElementById("pubComentario").value;
+    const archivo = document.getElementById("pubImagen")?.files[0];
 
-document.addEventListener("click", () => {
-    const btn = document.getElementById("guardarPublicacion");
-    if (!btn) return;
+    if (!comentario) return alert("Escribe un comentario.");
 
-    btn.onclick = async () => {
-        const archivo = document.getElementById("imgInput").files[0];
-        const comentario = document.getElementById("comentarioInput").value;
+    let imagenBase64 = "";
 
-        if (!archivo) return alert("Selecciona una imagen.");
-        if (!comentario) return alert("Escribe un comentario.");
+    if (archivo) {
+        const reader = new FileReader();
+        reader.readAsDataURL(archivo);
+        await new Promise(res => reader.onload = res);
+        imagenBase64 = reader.result;
+    }
 
-        const lector = new FileReader();
-        lector.onload = async (e) => {
-            const imgBase64 = e.target.result;
-            const fecha = new Date().toISOString();
+    await addDoc(collection(db, "publicaciones"), {
+        comentario,
+        img: imagenBase64,
+        fecha: new Date().toISOString()
+    });
 
-            await addDoc(collection(db, "publicaciones"), {
-                img: imgBase64,
-                comentario,
-                fecha
-            });
+    alert("Publicación guardada correctamente.");
+    document.getElementById("pubComentario").value = "";
+    if (archivo) document.getElementById("pubImagen").value = "";
 
-            alert("📌 Publicación guardada.");
-            mostrarPublicaciones();
-        };
+    mostrarPublicaciones();
+}
 
-        lector.readAsDataURL(archivo);
-    };
-});
+/* ===========================
+   2. GUARDAR TESTIMONIO
+=========================== */
+export async function guardarTestimonioAdmin() {
+    const nombre = document.getElementById("testNombre").value;
+    const texto = document.getElementById("testTexto").value;
+    const estrellas = document.getElementById("testEstrellas").value;
 
+    if (!nombre || !texto || !estrellas) {
+        return alert("Completa todos los campos.");
+    }
 
-/* ================================
-   GUARDAR TESTIMONIO EN FIRESTORE
-================================ */
+    await addDoc(collection(db, "testimonios"), {
+        nombre,
+        texto,
+        estrellas: parseInt(estrellas),
+        fecha: new Date().toISOString()
+    });
 
-document.addEventListener("click", () => {
-    const btn = document.getElementById("guardarTestimonio");
-    if (!btn) return;
+    alert("Testimonio agregado correctamente.");
+    document.getElementById("testNombre").value = "";
+    document.getElementById("testTexto").value = "";
+    document.getElementById("testEstrellas").value = "";
 
-    btn.onclick = async () => {
-        const texto = document.getElementById("testimonioInput").value;
+    mostrarTestimonios();
+}
 
-        if (!texto) return alert("Escribe un testimonio.");
+/* ===========================
+   3. MOSTRAR PUBLICACIONES
+=========================== */
+export async function mostrarPublicaciones() {
+    const cont = document.getElementById("adminListaPublicaciones");
+    if (!cont) return;
 
-        await addDoc(collection(db, "testimonios"), {
-            texto: texto,
-            fecha: new Date().toISOString()
-        });
-
-        alert("📝 Testimonio agregado.");
-        mostrarTestimonios();
-    };
-});
-
-
-/* ================================
-   MOSTRAR PUBLICACIONES
-================================ */
-
-async function mostrarPublicaciones() {
-    const cont = document.getElementById("galeria-grid");
     cont.innerHTML = "";
 
     const snap = await getDocs(collection(db, "publicaciones"));
+
     snap.forEach((docu) => {
         const pub = docu.data();
-        const card = document.createElement("div");
-        card.classList.add("publicacion");
 
-        card.innerHTML = `
-            <img src="${pub.img}">
-            <p>${pub.comentario}</p>
-            <small>${new Date(pub.fecha).toLocaleDateString()}</small>
-            <button onclick="eliminarPublicacion('${docu.id}')" 
-            style="margin-top:10px;background:red;color:white;border:none;padding:8px;border-radius:6px;cursor:pointer;">
-                Eliminar
-            </button>
+        cont.innerHTML += `
+            <div class="admin-card">
+                ${pub.img ? `<img src="${pub.img}" class="admin-img">` : ""}
+                <p>${pub.comentario}</p>
+                <small>${new Date(pub.fecha).toLocaleString()}</small>
+
+                <button class="btn-delete" onclick="eliminarPublicacion('${docu.id}')">
+                    Eliminar
+                </button>
+            </div>
         `;
-        cont.appendChild(card);
     });
 }
 
-mostrarPublicaciones();
+/* ===========================
+   4. MOSTRAR TESTIMONIOS
+=========================== */
+export async function mostrarTestimonios() {
+    const cont = document.getElementById("adminListaTestimonios");
+    if (!cont) return;
 
-
-/* ================================
-   MOSTRAR TESTIMONIOS
-================================ */
-
-async function mostrarTestimonios() {
-    const cont = document.getElementById("testimonios-grid");
     cont.innerHTML = "";
 
     const snap = await getDocs(collection(db, "testimonios"));
+
     snap.forEach((docu) => {
         const t = docu.data();
-        const card = document.createElement("div");
-        card.classList.add("testimonio-card");
 
-        card.innerHTML = `
-            <p>"${t.texto}"</p>
-            <small>${new Date(t.fecha).toLocaleDateString()}</small>
+        cont.innerHTML += `
+            <div class="admin-card">
+                <h4>${t.nombre}</h4>
+                <p>${t.texto}</p>
+                <p>⭐ ${t.estrellas}</p>
+                <small>${new Date(t.fecha).toLocaleString()}</small>
+
+                <button class="btn-delete" onclick="eliminarTestimonio('${docu.id}')">
+                    Eliminar
+                </button>
+            </div>
         `;
-
-        cont.appendChild(card);
     });
 }
 
-mostrarTestimonios();
-
-
-/* ================================
-   ELIMINAR PUBLICACIÓN
-================================ */
-
+/* ===========================
+   5. ELIMINAR PUBLICACIÓN
+=========================== */
 window.eliminarPublicacion = async function(id) {
     if (!confirm("¿Eliminar publicación?")) return;
 
     await deleteDoc(doc(db, "publicaciones", id));
     mostrarPublicaciones();
-};
+}
+
+/* ===========================
+   6. ELIMINAR TESTIMONIO
+=========================== */
+window.eliminarTestimonio = async function(id) {
+    if (!confirm("¿Eliminar testimonio?")) return;
+
+    await deleteDoc(doc(db, "testimonios", id));
+    mostrarTestimonios();
+}
+
+/* ==========================================================
+   AUTO-CARGA EN admin.html
+========================================================== */
+if (window.location.pathname.includes("admin.html")) {
+    mostrarPublicaciones();
+    mostrarTestimonios();
+}
+

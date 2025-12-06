@@ -6,30 +6,113 @@
     <title>Panel Administrador - Eventos York & Katy</title>
 
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* ============================
+           PANEL ADMIN PREMIUM
+        ============================= */
+
+        body {
+            background: url("assets/fondo1.png") center/cover fixed;
+            color: white;
+        }
+
+        #adminPanel {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 35px;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        #adminPanel h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.6);
+        }
+
+        #adminPanel h3 {
+            margin-top: 25px;
+            font-size: 26px;
+            color: #ff7fbd;
+            text-shadow: 0 0 10px rgba(255,0,120,0.4);
+        }
+
+        #adminPanel input,
+        #adminPanel textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            margin-top: 12px;
+            font-size: 18px;
+            color: #333;
+            box-shadow: 0 0 8px rgba(255,255,255,0.2);
+        }
+
+        #adminPanel textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        .btn-admin {
+            margin-top: 18px;
+            background: #ff4f9a;
+            color: white;
+            padding: 14px 25px;
+            border-radius: 10px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 14px rgba(255,80,160,0.5);
+            width: 100%;
+        }
+
+        .btn-admin:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 22px rgba(255,100,180,0.75);
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            height: 2px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+        }
+
+        .logout-btn {
+            margin-top: 30px;
+            background: #ff7f50;
+        }
+    </style>
 </head>
 
 <body>
 
-    <section id="adminPanel">
+    <section id="adminPanel" class="fade-up">
+
         <h2>Panel de Administración</h2>
 
         <!-- PUBLICAR NUEVA PUBLICACIÓN -->
         <h3>Agregar Nueva Publicación</h3>
         <input type="text" id="pubComentario" placeholder="Comentario de la publicación">
-        <button onclick="guardarPublicacion()">Guardar Publicación</button>
+        <button class="btn-admin" onclick="guardarPublicacion()">Guardar Publicación</button>
 
-        <hr><br>
+        <hr>
 
         <!-- AGREGAR NUEVO TESTIMONIO -->
-        <h3>Agregar Testimonio Manualmente</h3>
+        <h3>Agregar Testimonio Manual</h3>
         <input type="text" id="testNombre" placeholder="Nombre del cliente">
         <textarea id="testTexto" placeholder="Testimonio"></textarea>
         <input type="number" id="testEstrellas" placeholder="Estrellas (1-5)" min="1" max="5">
-        <button onclick="guardarTestimonioAdmin()">Guardar Testimonio</button>
+        <button class="btn-admin" onclick="guardarTestimonioAdmin()">Guardar Testimonio</button>
 
-        <br><br>
-
-        <button onclick="salirAdmin()">Cerrar Sesión</button>
+        <button class="btn-admin logout-btn" onclick="salirAdmin()">Cerrar Sesión</button>
     </section>
 
     <!-- FIREBASE -->
@@ -68,11 +151,11 @@
             }
 
             await addDoc(collection(db, "publicaciones"), {
-                comentario: comentario,
+                comentario,
                 fecha: new Date().toISOString()
             });
 
-            alert("Publicación agregada");
+            alert("Publicación agregada correctamente");
             document.getElementById("pubComentario").value = "";
         }
 
@@ -91,13 +174,13 @@
             }
 
             await addDoc(collection(db, "testimonios"), {
-                nombre: nombre,
-                texto: texto,
+                nombre,
+                texto,
                 estrellas: parseInt(estrellas),
                 fecha: new Date().toISOString()
             });
 
-            alert("Testimonio guardado");
+            alert("Testimonio guardado correctamente");
             document.getElementById("testNombre").value = "";
             document.getElementById("testTexto").value = "";
             document.getElementById("testEstrellas").value = "";
@@ -117,3 +200,4 @@
 
 </body>
 </html>
+

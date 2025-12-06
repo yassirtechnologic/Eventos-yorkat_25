@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "nombre": "María González",
+        "foto": "assets/user1.jpg",
+        "comentario": "El servicio fue excelente, muy profesionales y atentos en todo momento."
+    },
+    {
+        "id": 2,
+        "nombre": "Carlos Martínez",
+        "foto": "assets/user2.jpg",
+        "comentario": "Contratamos para un cumpleaños y todo quedó espectacular. 100% recomendados."
+    },
+    {
+        "id": 3,
+        "nombre": "Laura Peña",
+        "foto": "assets/user3.jpg",
+        "comentario": "Muy buena organización, decoración hermosa y comida deliciosa."
+    }
+]

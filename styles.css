@@ -1,4 +1,6 @@
-/* RESET */
+/* ==========================================================
+   RESET GENERAL
+========================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -7,66 +9,61 @@
 }
 
 body {
-    background: white;
+    background: #ffffff;
     color: #333;
+    overflow-x: hidden;
 }
 
-/* ======================= */
-/* NAVBAR SLIM ULTRA PRO   */
-/* ======================= */
-
+/* ==========================================================
+   NAVBAR PREMIUM ULTRA SLIM
+========================================================== */
 .navbar {
     position: sticky;
     top: 0;
     width: 100%;
-    padding: 8px 40px; /* ALTURA MUY REDUCIDA */
+    padding: 8px 40px;
     background: #ff4f9a;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    gap: 25px; /* MENOR SEPARACIÓN */
+    gap: 25px;
     z-index: 9999;
-    height: 55px; /* 🔥 ALTURA FIJA, SUPER SLIM */
+    height: 55px;
 }
 
-/* LOGO MAS PEQUEÑO */
 .logo {
-    width: 42px; /* REDUCIDO A LA MITAD */
+    width: 42px;
     cursor: pointer;
 }
 
-/* LINKS MÁS PEQUEÑOS Y EN UNA LÍNEA */
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 24px; /* MENOS ESPACIO ENTRE BOTONES */
+    gap: 24px;
     align-items: center;
 }
 
 .nav-links a {
-    color: white !important;
+    color: #fff !important;
     text-decoration: none;
-    font-size: 15px;  /* 🔥 MAS PEQUEÑO */
-    font-weight: 600; /* MAS DELGADO */
-    padding: 4px 6px; /* MENOS ANCHO */
+    font-size: 15px;
+    font-weight: 600;
+    padding: 4px 6px;
     border-radius: 4px;
     transition: 0.25s ease;
 }
 
 .nav-links a:hover {
-    background: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
 }
 
-/* ======================= */
-/* HERO                    */
-/* ======================= */
-
+/* ==========================================================
+   HERO
+========================================================== */
 .hero {
     height: 100vh;
-    background-image: url("assets/fondo.png");
-    background-size: cover;
-    background-position: center;
+    background: url("assets/fondo.png") center/cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,43 +72,44 @@ body {
 }
 
 .hero-content {
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0,0,0,0.45);
     padding: 45px;
     border-radius: 16px;
     backdrop-filter: blur(6px);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 .hero h1 {
     font-size: 58px;
+    text-shadow: 0 0 14px rgba(0,0,0,0.7);
 }
 
 .hero p {
     margin-top: 12px;
     font-size: 23px;
+    opacity: 0.95;
 }
 
 .btn {
     margin-top: 18px;
-    display: inline-block;
     padding: 12px 26px;
     background: #ff7f50;
     color: white;
     border-radius: 8px;
     text-decoration: none;
     font-size: 20px;
-    box-shadow: 0 0 10px rgba(255, 96, 80, 0.5);
     transition: 0.3s;
+    display: inline-block;
 }
 
 .btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 16px rgba(255, 96, 80, 0.8);
+    transform: scale(1.06);
+    box-shadow: 0 0 18px rgba(255,96,80,0.9);
 }
 
-/* ======================= */
-/* SECCIONES GENERALES     */
-/* ======================= */
-
+/* ==========================================================
+   SECCIONES GENERALES
+========================================================== */
 section {
     padding: 90px 25px;
     text-align: center;
@@ -121,113 +119,131 @@ h2 {
     font-size: 42px;
     margin-bottom: 25px;
     color: #ff7f50;
-    text-shadow: 0 0 8px rgba(0,0,0,0.4);
+    text-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
-/* ======================= */
-/* FONDO PARALLAX          */
-/* ======================= */
-
+/* ==========================================================
+   FONDO PARALLAX
+========================================================== */
 .section-bg {
-    background-image: url("assets/fondo1.png");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background: url("assets/fondo1.png") center/cover fixed;
 }
 
-/* ======================= */
-/* SERVICIOS               */
-/* ======================= */
+/* ==========================================================
+   SERVICIOS — ESTILO PREMIUM SIN TARJETAS
+========================================================== */
+
+.servicios {
+    color: white;
+}
 
 .servicios-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 35px;
+    padding: 20px;
 }
 
 .servicio-card {
-    padding: 25px;
-    background: rgba(255, 228, 255, 0.7);
-    border: 1px solid #e7bfff;
-    border-radius: 14px;
+    background: none !important;     /* sin tarjetas */
+    border: none !important;         /* sin bordes */
+    box-shadow: none !important;     /* sin sombra */
+    padding: 0;
+    text-align: center;
+    color: #ffeaff;                  /* blanco suave */
     font-size: 22px;
-    transition: 0.4s;
-    backdrop-filter: blur(10px);
+    font-weight: bold;
+    transition: 0.3s ease;
+    cursor: default;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
 
+/* HOVER Premium (ligero y elegante) */
 .servicio-card:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    transform: translateY(-6px);
+    opacity: 0.85;
 }
 
-/* ============================= */
-/* PUBLICACIONES INSTAGRAM PRO   */
-/* ============================= */
-
+/* ==========================================================
+   PUBLICACIONES 
+========================================================== */
 .galeria-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 28px;
-    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px;
 }
 
 .galeria-item {
-    width: 260px;
-    padding: 20px;
-    border-radius: 14px;
-    background: rgba(0,0,0,0.45);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s ease;
+    background: transparent;
+}
+
+.galeria-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+.galeria-item p {
+    margin-top: 8px;
     color: white;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 12px rgba(0,0,0,0.4);
-    transition: 0.3s;
+    font-size: 17px;
+    text-align: center;
 }
 
 .galeria-item:hover {
-    transform: scale(1.06);
-    box-shadow: 0 0 18px rgba(255,255,255,0.3);
+    transform: scale(1.03);
 }
 
-/* ============================= */
-/* CARTA DE COMIDA PRO          */
-/* ============================= */
-
+/* ==========================================================
+   CARTA DE COMIDA 
+========================================================== */
 .carta-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
+    gap: 35px;
     padding: 20px;
 }
 
 .carta-item {
-    background: rgba(255, 228, 255, 0.8);
-    border: 1px solid #e7bfff;
-    padding: 25px;
-    border-radius: 14px;
-    backdrop-filter: blur(10px);
-    color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
     text-align: center;
-    transition: 0.35s;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
 }
 
 .carta-item:hover {
-    transform: scale(1.06);
-    box-shadow: 0 0 22px rgba(255,255,255,0.4);
+    transform: scale(1.03);
 }
 
 .carta-img {
     width: 100%;
-    height: 220px;
+    height: 230px;
     object-fit: cover;
     border-radius: 12px;
-    margin-bottom: 12px;
 }
 
+.carta-item h3 {
+    margin-top: 10px;
+    font-size: 22px;
+    color: #fff;
+}
 
-/* ============================= */
-/* TESTIMONIOS PRO              */
-/* ============================= */
+.carta-item p {
+    margin-top: 4px;
+    font-size: 16px;
+    color: #ffe7f8;
+}
 
+/* ==========================================================
+   TESTIMONIOS PREMIUM
+========================================================== */
 .testimonios-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -235,32 +251,29 @@ h2 {
 }
 
 .testimonio-card {
-    background: rgba(255, 228, 255, 0.7);
-    border: 1px solid #e7bfff;
-    padding: 28px;
     border-radius: 14px;
-    font-size: 20px;
+    background: rgba(255,228,255,0.75);
+    padding: 28px;
     color: white;
     backdrop-filter: blur(10px);
     transition: 0.35s;
-    box-shadow: 0 0 14px rgba(0,0,0,0.35);
+    box-shadow: 0 0 18px rgba(0,0,0,0.4);
 }
 
 .testimonio-card:hover {
-    transform: scale(1.06);
-    box-shadow: 0 0 22px rgba(255,255,255,0.45);
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 0 28px rgba(255,255,255,0.55);
 }
 
 .estrellas {
-    font-size: 20px;
-    color: gold;
     margin-top: 10px;
+    color: gold;
+    font-size: 20px;
 }
 
-/* FORMULARIO ELEGANTE */
-
+/* FORMULARIO TESTIMONIOS */
 .formulario-testimonio {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255,255,255,0.22);
     padding: 28px;
     border-radius: 14px;
     backdrop-filter: blur(10px);
@@ -269,7 +282,7 @@ h2 {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 0 0 14px rgba(255,255,255,0.35);
+    box-shadow: 0 0 18px rgba(255,255,255,0.4);
 }
 
 .formulario-testimonio input,
@@ -284,20 +297,18 @@ h2 {
     box-shadow: 0 0 8px rgba(0,0,0,0.2);
 }
 
-/* ======================= */
-/* CONTACTO                */
-/* ======================= */
-
+/* ==========================================================
+   CONTACTO
+========================================================== */
 .info-contacto {
     color: white !important;
     font-size: 20px;
-    text-shadow: 0 0 6px black;
+    text-shadow: 0 0 8px black;
 }
 
-/* ======================= */
-/* FOOTER                  */
-/* ======================= */
-
+/* ==========================================================
+   FOOTER
+========================================================== */
 footer {
     background: #222;
     color: white;
@@ -306,10 +317,9 @@ footer {
     font-size: 17px;
 }
 
-/* ======================= */
-/* ANIMACIONES             */
-/* ======================= */
-
+/* ==========================================================
+   ANIMACIONES
+========================================================== */
 .fade-up {
     opacity: 0;
     animation: fadeUp 1.4s ease forwards;
@@ -320,145 +330,93 @@ footer {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ======================= */
-/* MODAL ADMIN             */
-/* ======================= */
-
-#adminModal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.75);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-}
-
-.modal-content {
-    background: rgba(255,255,255,0.15);
-    padding: 35px;
-    border-radius: 14px;
-    width: 90%;
-    max-width: 420px;
-    text-align: center;
-    color: white;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 20px rgba(255,255,255,0.3);
-}
-
-.admin-btn {
-    background: #ff4f9a;
-    color: white;
-    border: none;
-    padding: 14px;
-    width: 100%;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* ============================= */
-/* TIPOS DE EVENTOS (NUEVA SECCIÓN) */
-/* ============================= */
+/* ==========================================================
+   TIPOS DE EVENTOS — ESTILO PREMIUM SIN TARJETAS
+========================================================== */
 
 .event-types-section {
     padding: 90px 25px;
-    text-align: center;
-    color: white;
     background: linear-gradient(
-                rgba(0,0,0,0.55),
-                rgba(0,0,0,0.55)
-             ),
-             url("assets/fondo1.png"); /* Puedes cambiarlo si quieres otro fondo */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.65)
+    ),
+    url("assets/fondo1.png") center/cover fixed;
+    color: white;
+    text-align: center;
 }
 
 .event-types-section h2 {
-    font-size: 46px;
-    color: #ff7f50;
-    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 48px;
     margin-bottom: 15px;
+    color: #ff7f50;
+    text-shadow: 0 0 12px rgba(0,0,0,0.6);
 }
 
 .event-subtitle {
-    color: #ffeaff;
     font-size: 20px;
+    color: #ffeaff;
     max-width: 900px;
-    margin: 0 auto 45px;
+    margin: 0 auto 60px;
     line-height: 1.5;
 }
 
-/* CONTENEDOR TARJETAS */
+/* CONTENEDOR LIMPIO SIN TARJETAS */
 .event-types-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-    padding: 20px;
+    gap: 40px;
 }
 
-/* TARJETAS DE EVENTOS */
+/* ESTILO DE CADA ITEM SIN CAJAS */
 .event-card {
-    background: rgba(255, 228, 255, 0.75);
-    border: 1px solid #e7bfff;
-    padding: 28px;
-    border-radius: 18px;
+    background: none !important; /* adiós tarjetas */
+    border: none !important;     /* adiós bordes */
+    box-shadow: none !important; /* adiós sombra */
+    padding: 0;
+    transition: 0.3s;
     text-align: center;
-    color: #ffffff;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 14px rgba(0,0,0,0.35);
-    transition: 0.35s ease;
 }
 
-.event-card:hover {
-    transform: scale(1.06);
-    box-shadow: 0 0 22px rgba(255,255,255,0.4);
-}
-
-/* ICONOS GRANDES */
+/* ICONO GRANDE Y ELEGANTE */
 .event-icon {
-    font-size: 50px;
+    font-size: 60px;
+    display: block;
     margin-bottom: 12px;
 }
 
-/* TITULO DE CADA TARJETA */
+/* TÍTULO */
 .event-card h3 {
-    font-size: 24px;
-    margin-bottom: 12px;
-    text-shadow: 0 0 6px rgba(0,0,0,0.5);
+    font-size: 26px;
+    margin-bottom: 8px;
+    color: #fff;
+    text-shadow: 0 0 6px rgba(0,0,0,0.6);
 }
 
-/* TEXTO DE CADA TARJETA */
+/* DESCRIPCIÓN MINIMALISTA */
 .event-card p {
-    color: #fff0fa;
     font-size: 17px;
+    color: #e9d3f5;
+    max-width: 90%;
+    margin: 0 auto;
+    line-height: 1.4;
 }
 
-/* ------------------------------- */
-/*  RESPONSIVE PARA IPHONE / MÓVIL */
-/* ------------------------------- */
+/* EFECTO HOVER MINIMALISTA (OPCIONAL) */
+.event-card:hover {
+    transform: translateY(-6px);
+}
 
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
 @media (max-width: 600px) {
-    .event-types-section h2 {
-        font-size: 36px;
-    }
-
-    .event-subtitle {
-        font-size: 17px;
-        padding: 0 10px;
-    }
-
-    .event-card {
-        padding: 22px;
-    }
-
-    .event-card h3 {
-        font-size: 20px;
-    }
+    .hero h1 { font-size: 40px; }
+    .event-types-section h2 { font-size: 36px; }
+    .event-card { padding: 22px; }
+    .carta-img { height: 200px; }
 }
+
+
 
 
 
