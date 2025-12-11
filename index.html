@@ -1,65 +1,162 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventos York & Katy</title>
+
+    <!-- Título dinámico -->
+    <title id="dynamic-title">Eventos York & Katy</title>
+
+    <!-- Descripción dinámica -->
+    <meta id="dynamic-description" name="description"
+        content="Organización de eventos, decoración, catering, música, fotografía y mucho más en Mallorca y Nicaragua.">
+
+    <!-- Open Graph dinámico (redes sociales) -->
+    <meta property="og:title" id="og-title" content="Eventos York & Katy">
+    <meta property="og:description" id="og-description"
+        content="Organización de eventos, decoración, catering y fotografía en Mallorca y Nicaragua.">
+    <meta property="og:image" content="assets/logo.png">
+    <meta property="og:url" content="https://yorkandkat.com">
+    <meta property="og:type" content="website">
+
+    <!-- Hreflang -->
+    <link rel="alternate" href="https://yorkandkat.com" hreflang="es">
+    <link rel="alternate" href="https://yorkandkat.com" hreflang="en">
+    <link rel="alternate" href="https://yorkandkat.com" hreflang="x-default">
+
+    <!-- SEO Schema -->
+    <script type="application/ld+json" id="seo-schema">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Eventos York & Katy",
+      "description": "Organización de eventos, decoración, catering, música y fotografía.",
+      "url": "https://yorkandkat.com",
+      "logo": "https://yorkandkat.com/assets/logo.png",
+      "areaServed": ["España", "Nicaragua"]
+    }
+    </script>
 
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="assets/logo.png" type="image/png">
 
-    <!-- Mejor SEO -->
-    <meta name="description" content="Organización de eventos, decoración, catering, música, fotografía y mucho más en Mallorca y Nicaragua.">
 </head>
 
 <body>
 
     <!-- NAVBAR -->
     <header class="navbar">
+
+        <!-- LOGO -->
         <img src="assets/logo.png" class="logo" id="adminTrigger">
+
+        <!-- NAVEGACIÓN DESKTOP -->
         <nav>
             <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#eventos">Eventos</a></li>
-                <li><a href="#galeria">Publicaciones</a></li>
-                <li><a href="#carta">Carta</a></li>
-                <li><a href="#testimonios">Testimonios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#inicio" data-translate="navInicio">Inicio</a></li>
+                <li><a href="#nosotros" data-translate="navNosotros">Sobre Nosotros</a></li>
+                <li><a href="#servicios" data-translate="navServicios">Servicios</a></li>
+                <li><a href="#eventos" data-translate="navEventos">Eventos</a></li>
+                <li><a href="#galeria" data-translate="navGaleria">Publicaciones</a></li>
+                <li><a href="#carta" data-translate="navCarta">Carta</a></li>
+                <li><a href="#testimonios" data-translate="navTestimonios">Testimonios</a></li>
+                <li><a href="#contacto" data-translate="navContacto">Contacto</a></li>
             </ul>
         </nav>
+
+        <!-- SELECTOR DE IDIOMA -->
+        <div id="language-selector">
+            <span onclick="setLanguage('es')">🇪🇸 ES</span>
+            <span class="separator">|</span>
+            <span onclick="setLanguage('en')">🇬🇧 EN</span>
+        </div>
+
+        <!-- BOTÓN HAMBURGUESA SIEMPRE VISIBLE -->
+        <div class="hamburger" id="hamburger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+
     </header>
+
+    <!-- MENÚ MÓVIL -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#inicio" onclick="closeMenu()" data-translate="navInicio">Inicio</a>
+        <a href="#nosotros" onclick="closeMenu()" data-translate="navNosotros">Sobre Nosotros</a>
+        <a href="#servicios" onclick="closeMenu()" data-translate="navServicios">Servicios</a>
+        <a href="#eventos" onclick="closeMenu()" data-translate="navEventos">Eventos</a>
+        <a href="#galeria" onclick="closeMenu()" data-translate="navGaleria">Publicaciones</a>
+        <a href="#carta" onclick="closeMenu()" data-translate="navCarta">Carta</a>
+        <a href="#testimonios" onclick="closeMenu()" data-translate="navTestimonios">Testimonios</a>
+        <a href="#contacto" onclick="closeMenu()" data-translate="navContacto">Contacto</a>
+
+        <hr style="border-color: rgba(255,255,255,0.4); margin: 12px 0;">
+
+        <a onclick="setLanguage('es')">🇪🇸 Español</a>
+        <a onclick="setLanguage('en')">🇬🇧 English</a>
+    </div>
 
     <!-- HERO -->
     <section id="inicio" class="hero">
         <div class="hero-content fade-up">
-            <h1>Eventos York & Katy</h1>
-            <p>Donde cada celebración se convierte en un recuerdo inolvidable.</p>
-            <a href="#contacto" class="btn">Reservar ahora</a>
+            <h1 data-translate="heroTitle">Eventos York & Katy</h1>
+            <p data-translate="heroSubtitle">Donde cada celebración se convierte en un recuerdo inolvidable.</p>
+            <a href="#contacto" class="btn" data-translate="heroButton">Reservar ahora</a>
         </div>
     </section>
 
-    <!-- ZONA CON FONDO -->
+    <!-- ============================= -->
+    <!-- 🔥 SECCIÓN SOBRE NOSOTROS (CORREGIDA) -->
+    <!-- ============================= -->
+    <section id="nosotros" class="sobre-nosotros-section fade-up">
+
+        <h2 class="sobre-title" data-translate="aboutTitle">Sobre Nosotros</h2>
+
+        <div class="sobre-container">
+            <img src="assets/logo.png" class="sobre-logo">
+
+            <p data-translate="aboutP1">
+                Somos York y Katy, un equipo apasionado por crear momentos inolvidables.
+                Desde Mallorca y Nicaragua, organizamos eventos con un estilo único,
+                combinando creatividad, profesionalismo y un toque familiar que nos caracteriza.
+            </p>
+
+            <p data-translate="aboutP2">
+                Nos especializamos en decoración, organización integral, catering,
+                fotografía y ambientación personalizada. Cada detalle importa,
+                y nuestro objetivo es convertir tus ideas en recuerdos mágicos.
+            </p>
+
+            <p data-translate="aboutP3">
+                Gracias por confiar en nosotros. Tu celebración es nuestra inspiración.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- RESTO DE LA WEB -->
     <div class="section-bg">
 
         <!-- SERVICIOS -->
         <section id="servicios" class="servicios">
-            <h2 class="fade-up">Nuestros Servicios</h2>
+            <h2 class="fade-up" data-translate="servicesTitle">Nuestros Servicios</h2>
 
             <div class="servicios-grid">
-                <div class="servicio-card fade-up">Organización de Eventos</div>
-                <div class="servicio-card fade-up">Decoración</div>
-                <div class="servicio-card fade-up">Catering</div>
-                <div class="servicio-card fade-up">Música & DJ</div>
-                <div class="servicio-card fade-up">Fotografía</div>
-                <div class="servicio-card fade-up">Diseño Personalizado</div>
+                <div class="servicio-card fade-up" data-translate="servicio1">Organización de Eventos</div>
+                <div class="servicio-card fade-up" data-translate="servicio2">Decoración</div>
+                <div class="servicio-card fade-up" data-translate="servicio3">Catering</div>
+                <div class="servicio-card fade-up" data-translate="servicio4">Música & DJ</div>
+                <div class="servicio-card fade-up" data-translate="servicio5">Fotografía</div>
+                <div class="servicio-card fade-up" data-translate="servicio6">Diseño Personalizado</div>
             </div>
         </section>
 
-        <!-- EVENTOS -->
+        <!-- TIPOS DE EVENTOS -->
         <section id="eventos" class="event-types-section fade-up">
-            <h2>Tipos de Eventos</h2>
-            <p class="event-subtitle">
+            <h2 data-translate="eventosTitle">Tipos de Eventos</h2>
+            <p class="event-subtitle" data-translate="eventosSubtitle">
                 Organizamos eventos sociales, corporativos y especiales con atención al detalle y completa personalización.
             </p>
 
@@ -67,82 +164,92 @@
 
                 <div class="event-card">
                     <span class="event-icon">🎉</span>
-                    <h3>Eventos Sociales</h3>
-                    <p>Cumpleaños, bodas, bautizos, comuniones, aniversarios y celebraciones familiares.</p>
+                    <h3 data-translate="eventoSocial">Eventos Sociales</h3>
+                    <p data-translate="eventoSocialDesc">
+                        Cumpleaños, bodas, bautizos, comuniones, aniversarios.
+                    </p>
                 </div>
 
                 <div class="event-card">
                     <span class="event-icon">🏢</span>
-                    <h3>Eventos Corporativos</h3>
-                    <p>Reuniones, conferencias, lanzamientos, presentaciones y fiestas de empresa.</p>
+                    <h3 data-translate="eventoCorp">Eventos Corporativos</h3>
+                    <p data-translate="eventoCorpDesc">
+                        Reuniones, conferencias, lanzamientos y fiestas de empresa.
+                    </p>
                 </div>
 
                 <div class="event-card">
                     <span class="event-icon">🍸</span>
-                    <h3>Cocteles & Galas</h3>
-                    <p>Cocteles elegantes, cenas formales, eventos VIP y recepciones especiales.</p>
+                    <h3 data-translate="eventoGala">Cocteles & Galas</h3>
+                    <p data-translate="eventoGalaDesc">
+                        Eventos elegantes, cenas formales y recepciones especiales.
+                    </p>
                 </div>
 
                 <div class="event-card">
                     <span class="event-icon">🎓</span>
-                    <h3>Eventos Académicos</h3>
-                    <p>Graduaciones, ceremonias escolares y celebraciones estudiantiles.</p>
+                    <h3 data-translate="eventoAcad">Eventos Académicos</h3>
+                    <p data-translate="eventoAcadDesc">
+                        Graduaciones y ceremonias estudiantiles.
+                    </p>
                 </div>
 
                 <div class="event-card">
                     <span class="event-icon">🎪</span>
-                    <h3>Eventos Personalizados</h3>
-                    <p>Eventos temáticos, al aire libre, festivales y experiencias a medida.</p>
+                    <h3 data-translate="eventoPers">Eventos Personalizados</h3>
+                    <p data-translate="eventoPersDesc">
+                        Eventos temáticos y experiencias a medida.
+                    </p>
                 </div>
 
             </div>
         </section>
 
-        <!-- PUBLICACIONES -->
+        <!-- GALERÍA -->
         <section id="galeria" class="galeria">
-            <h2 class="fade-up">Publicaciones</h2>
+            <h2 class="fade-up" data-translate="galeriaTitle">Publicaciones</h2>
             <div id="galeria-grid" class="galeria-grid"></div>
         </section>
 
-        <!-- CARTA DE COMIDA -->
+        <!-- CARTA -->
         <section id="carta" class="carta">
-            <h2 class="fade-up">Carta de Comida</h2>
+            <h2 class="fade-up" data-translate="cartaTitle">Carta de Comida</h2>
 
             <div class="carta-grid fade-up">
-
-                <div class="carta-item"><img src="assets/presentacion.png" class="carta-img"><h3>Menú de la Casa</h3><p>Especialidades destacadas.</p></div>
-                <div class="carta-item"><img src="assets/entrantes.png" class="carta-img"><h3>Entrantes</h3><p>Aperitivos fríos y calientes.</p></div>
-                <div class="carta-item"><img src="assets/ensaladas.png" class="carta-img"><h3>Ensaladas</h3><p>Opciones frescas y saludables.</p></div>
-                <div class="carta-item"><img src="assets/pollo.png" class="carta-img"><h3>Pollo</h3><p>Empanizado, BBQ o en salsa.</p></div>
-                <div class="carta-item"><img src="assets/cerdo.png" class="carta-img"><h3>Cerdo</h3><p>Sabor tradicional o gourmet.</p></div>
-                <div class="carta-item"><img src="assets/ternera.png" class="carta-img"><h3>Ternera</h3><p>Cortes seleccionados.</p></div>
-                <div class="carta-item"><img src="assets/pescado.png" class="carta-img"><h3>Pescado</h3><p>Frescura garantizada.</p></div>
-                <div class="carta-item"><img src="assets/marisco.png" class="carta-img"><h3>Mariscos</h3><p>Elegancia del mar.</p></div>
-                <div class="carta-item"><img src="assets/vegano_celiacos.png" class="carta-img"><h3>Vegano / Celíacos</h3><p>Opciones adaptadas.</p></div>
-                <div class="carta-item"><img src="assets/pasteles.png" class="carta-img"><h3>Pasteles</h3><p>Postres exquisitos.</p></div>
-                <div class="carta-item"><img src="assets/bebidas.png" class="carta-img"><h3>Bebidas</h3><p>Refrescos y jugos.</p></div>
-                <div class="carta-item"><img src="assets/alcohol.png" class="carta-img"><h3>Alcohólicas</h3><p>Cócteles premium.</p></div>
-
+                <div class="carta-item"><img src="assets/presentacion.png" class="carta-img"><h3 data-translate="carta1">Menú de la Casa</h3><p data-translate="carta1Desc">Especialidades destacadas.</p></div>
+                <div class="carta-item"><img src="assets/entrantes.png" class="carta-img"><h3 data-translate="carta2">Entrantes</h3><p data-translate="carta2Desc">Aperitivos fríos y calientes.</p></div>
+                <div class="carta-item"><img src="assets/ensaladas.png" class="carta-img"><h3 data-translate="carta3">Ensaladas</h3><p data-translate="carta3Desc">Opciones frescas y saludables.</p></div>
+                <div class="carta-item"><img src="assets/pollo.png" class="carta-img"><h3 data-translate="carta4">Pollo</h3><p data-translate="carta4Desc">Empanizado, BBQ o en salsa.</p></div>
+                <div class="carta-item"><img src="assets/cerdo.png" class="carta-img"><h3 data-translate="carta5">Cerdo</h3><p data-translate="carta5Desc">Sabor tradicional o gourmet.</p></div>
+                <div class="carta-item"><img src="assets/ternera.png" class="carta-img"><h3 data-translate="carta6">Ternera</h3><p data-translate="carta6Desc">Cortes seleccionados.</p></div>
+                <div class="carta-item"><img src="assets/pescado.png" class="carta-img"><h3 data-translate="carta7">Pescado</h3><p data-translate="carta7Desc">Frescura garantizada.</p></div>
+                <div class="carta-item"><img src="assets/marisco.png" class="carta-img"><h3 data-translate="carta8">Mariscos</h3><p data-translate="carta8Desc">Elegancia del mar.</p></div>
+                <div class="carta-item"><img src="assets/vegano_celiacos.png" class="carta-img"><h3 data-translate="carta9">Vegano / Celíacos</h3><p data-translate="carta9Desc">Opciones adaptadas.</p></div>
+                <div class="carta-item"><img src="assets/pasteles.png" class="carta-img"><h3 data-translate="carta10">Pasteles</h3><p data-translate="carta10Desc">Postres exquisitos.</p></div>
+                <div class="carta-item"><img src="assets/bebidas.png" class="carta-img"><h3 data-translate="carta11">Bebidas</h3><p data-translate="carta11Desc">Refrescos y jugos.</p></div>
+                <div class="carta-item"><img src="assets/alcohol.png" class="carta-img"><h3 data-translate="carta12">Alcohólicas</h3><p data-translate="carta12Desc">Cócteles premium.</p></div>
             </div>
         </section>
 
         <!-- TESTIMONIOS -->
         <section id="testimonios" class="testimonios">
-            <h2 class="fade-up">Testimonios</h2>
+            <h2 class="fade-up" data-translate="testimoniosTitle">Testimonios</h2>
 
             <div class="formulario-testimonio fade-up">
-                <h3>Escribe tu experiencia</h3>
+                <h3 data-translate="testimonioForm">Escribe tu experiencia</h3>
 
-                <input type="text" id="nombre" placeholder="Tu nombre" required>
-                <textarea id="texto" placeholder="Tu testimonio" required></textarea>
+                <input type="text" id="nombre" placeholder="Tu nombre" data-translate-placeholder="placeholderNombre">
+                <textarea id="texto" placeholder="Tu testimonio" data-translate-placeholder="placeholderTestimonio"></textarea>
 
                 <select id="estrellas">
-                    <option value="5">⭐⭐⭐⭐⭐ (5 estrellas)</option>
-                    <option value="4">⭐⭐⭐⭐ (4 estrellas)</option>
-                    <option value="3">⭐⭐⭐ (3 estrellas)</option>
+                    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                    <option value="4">⭐⭐⭐⭐ (4)</option>
+                    <option value="3">⭐⭐⭐ (3)</option>
                 </select>
 
-                <button onclick="guardarTestimonio()" class="btn">Enviar testimonio</button>
+                <button onclick="guardarTestimonio()" class="btn" data-translate="btnEnviarTestimonio">
+                    Enviar testimonio
+                </button>
             </div>
 
             <div id="testimonios-grid" class="testimonios-grid"></div>
@@ -150,39 +257,54 @@
 
         <!-- CONTACTO -->
         <section id="contacto" class="contacto">
-            <h2 class="fade-up">Reserva tu Evento</h2>
+            <h2 class="fade-up" data-translate="contactoTitulo">Reserva tu Evento</h2>
 
-            <p class="fade-up info-contacto"><strong>WhatsApp:</strong> +34 666 03 09 23</p>
-            <p class="fade-up info-contacto"><strong>Email España:</strong> mquintana2111@gmail.com</p>
-            <p class="fade-up info-contacto"><strong>Email Nicaragua:</strong> yorkat@gmail.com</p>
-            <p class="fade-up info-contacto">📍 Mallorca, España</p>
-            <p class="fade-up info-contacto">📍 León, Nicaragua</p>
+            <p class="fade-up info-contacto" data-translate="whatsapp"><strong>WhatsApp:</strong> +34 666 03 09 23</p>
+            <p class="fade-up info-contacto" data-translate="emailEs"><strong>Email España:</strong> mquintana2111@gmail.com</p>
+            <p class="fade-up info-contacto" data-translate="emailNi"><strong>Email Nicaragua:</strong> yorkat@gmail.com</p>
 
-            <a href="https://wa.me/34666030923" target="_blank" class="btn fade-up">Contactar por WhatsApp</a>
+            <p class="fade-up info-contacto" data-translate="locEs">📍 Mallorca, España</p>
+            <p class="fade-up info-contacto" data-translate="locNi">📍 León, Nicaragua</p>
+
+            <a href="https://wa.me/34666030923" target="_blank" class="btn fade-up" data-translate="btnWhatsapp">
+                Contactar por WhatsApp
+            </a>
         </section>
 
     </div>
 
     <!-- FOOTER -->
     <footer>
-        <p>© 2025 Eventos York & Katy | Todos los derechos reservados</p>
+        <p data-translate="footerText">© 2025 Eventos York & Katy | Todos los derechos reservados</p>
     </footer>
 
-    <!-- ADMIN JS -->
+    <!-- SCRIPTS -->
     <script src="admin.js"></script>
+    <script src="translations.js"></script>
+    <script src="lang.js"></script>
+
+    <!-- MENÚ HAMBURGUESA -->
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            mobileMenu.classList.toggle("open");
+        });
+
+        function closeMenu() {
+            hamburger.classList.remove("active");
+            mobileMenu.classList.remove("open");
+        }
+    </script>
 
     <!-- FIREBASE -->
     <script type="module">
-
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { 
-            getFirestore, collection, getDocs, addDoc 
-        } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
-        import { getAuth, signInWithEmailAndPassword } 
-        from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-
-        /* 🔥 CONFIG FIREBASE */
         const firebaseConfig = {
             apiKey: "AIzaSyCTHFlgEOEBXThDzdTRvk_0BwLjaTwRc7E",
             authDomain: "striped-smile-475414-v0.firebaseapp.com",
@@ -196,24 +318,20 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        /* PUBLICACIONES */
         async function cargarPublicaciones() {
             const cont = document.getElementById("galeria-grid");
             cont.innerHTML = "";
 
             const querySnapshot = await getDocs(collection(db, "publicaciones"));
             querySnapshot.forEach((doc) => {
-                const d = doc.data();
-
                 cont.innerHTML += `
                     <div class="galeria-item fade-up">
-                        <p style="color:white;">${d.comentario}</p>
+                        <p style="color:white;">${doc.data().comentario}</p>
                     </div>
                 `;
             });
         }
 
-        /* TESTIMONIOS */
         async function guardarTestimonio() {
             const nombre = document.getElementById("nombre").value;
             const texto = document.getElementById("texto").value;
@@ -225,17 +343,15 @@
             }
 
             await addDoc(collection(db, "testimonios"), {
-                nombre: nombre,
-                texto: texto,
+                nombre,
+                texto,
                 estrellas: parseInt(estrellas),
                 fecha: new Date().toISOString()
             });
 
             alert("¡Gracias por tu testimonio!");
-
             document.getElementById("nombre").value = "";
             document.getElementById("texto").value = "";
-
             cargarTestimonios();
         }
 
@@ -246,7 +362,6 @@
             const querySnapshot = await getDocs(collection(db, "testimonios"));
             querySnapshot.forEach((doc) => {
                 const d = doc.data();
-
                 cont.innerHTML += `
                     <div class="testimonio-card fade-up">
                         <h4 style="color:white;">${d.nombre}</h4>
@@ -257,7 +372,6 @@
             });
         }
 
-        /* LOGIN ADMIN */
         document.getElementById("adminTrigger").addEventListener("click", () => {
             const email = prompt("Correo administrador:");
             const pass = prompt("Contraseña:");
@@ -270,14 +384,20 @@
                 .catch(() => alert("Acceso denegado"));
         });
 
-        /* INICIO */
         cargarPublicaciones();
         cargarTestimonios();
-
     </script>
 
 </body>
+
 </html>
+
+
+
+
+
+
+
 
 
 

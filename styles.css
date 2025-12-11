@@ -59,6 +59,72 @@ body {
 }
 
 /* ==========================================================
+   HAMBURGUESA (SIEMPRE VISIBLE)
+========================================================== */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    margin-left: auto;
+    z-index: 10000;
+}
+
+.hamburger div {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.hamburger.active .line1 {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active .line2 {
+    opacity: 0;
+}
+.hamburger.active .line3 {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ==========================================================
+   MENÚ MÓVIL
+========================================================== */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 260px;
+    height: 100vh;
+    background: rgba(255, 79, 154, 0.96);
+    backdrop-filter: blur(6px);
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: 0.35s ease;
+    z-index: 99999;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.3);
+}
+
+.mobile-menu.open {
+    right: 0;
+}
+
+.mobile-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 12px 24px;
+    transition: 0.3s;
+}
+
+.mobile-menu a:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* ==========================================================
    HERO
 ========================================================== */
 .hero {
@@ -130,9 +196,45 @@ h2 {
 }
 
 /* ==========================================================
-   SERVICIOS — ESTILO PREMIUM SIN TARJETAS
+   SOBRE NOSOTROS (CORREGIDO)
 ========================================================== */
+#nosotros {
+    padding: 110px 25px;
+    text-align: center;
+    color: white;
+    background: linear-gradient(
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.65)
+    ),
+    url("assets/fondo1.png") center/cover fixed;
+}
 
+#nosotros h2 {
+    font-size: 48px;
+    margin-bottom: 25px;
+    color: #ff7f50;
+    text-shadow: 0 0 12px rgba(0,0,0,0.6);
+}
+
+#nosotros img {
+    width: 170px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+#nosotros p {
+    max-width: 900px;
+    margin: 0 auto 25px;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #ffeaff;
+    text-shadow: 0 0 6px rgba(0,0,0,0.6);
+}
+
+/* ==========================================================
+   SERVICIOS
+========================================================== */
 .servicios {
     color: white;
 }
@@ -145,27 +247,25 @@ h2 {
 }
 
 .servicio-card {
-    background: none !important;     /* sin tarjetas */
-    border: none !important;         /* sin bordes */
-    box-shadow: none !important;     /* sin sombra */
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
     padding: 0;
     text-align: center;
-    color: #ffeaff;                  /* blanco suave */
+    color: #ffeaff;
     font-size: 22px;
     font-weight: bold;
     transition: 0.3s ease;
-    cursor: default;
     text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
 
-/* HOVER Premium (ligero y elegante) */
 .servicio-card:hover {
     transform: translateY(-6px);
     opacity: 0.85;
 }
 
 /* ==========================================================
-   PUBLICACIONES 
+   PUBLICACIONES
 ========================================================== */
 .galeria-grid {
     display: grid;
@@ -186,7 +286,6 @@ h2 {
     width: 100%;
     height: 250px;
     object-fit: cover;
-    display: block;
 }
 
 .galeria-item p {
@@ -201,7 +300,7 @@ h2 {
 }
 
 /* ==========================================================
-   CARTA DE COMIDA 
+   CARTA
 ========================================================== */
 .carta-grid {
     display: grid;
@@ -242,7 +341,7 @@ h2 {
 }
 
 /* ==========================================================
-   TESTIMONIOS PREMIUM
+   TESTIMONIOS
 ========================================================== */
 .testimonios-grid {
     display: grid;
@@ -271,7 +370,6 @@ h2 {
     font-size: 20px;
 }
 
-/* FORMULARIO TESTIMONIOS */
 .formulario-testimonio {
     background: rgba(255,255,255,0.22);
     padding: 28px;
@@ -331,9 +429,8 @@ footer {
 }
 
 /* ==========================================================
-   TIPOS DE EVENTOS — ESTILO PREMIUM SIN TARJETAS
+   TIPOS DE EVENTOS
 ========================================================== */
-
 .event-types-section {
     padding: 90px 25px;
     background: linear-gradient(
@@ -360,31 +457,27 @@ footer {
     line-height: 1.5;
 }
 
-/* CONTENEDOR LIMPIO SIN TARJETAS */
 .event-types-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 40px;
 }
 
-/* ESTILO DE CADA ITEM SIN CAJAS */
 .event-card {
-    background: none !important; /* adiós tarjetas */
-    border: none !important;     /* adiós bordes */
-    box-shadow: none !important; /* adiós sombra */
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
     padding: 0;
     transition: 0.3s;
     text-align: center;
 }
 
-/* ICONO GRANDE Y ELEGANTE */
 .event-icon {
     font-size: 60px;
     display: block;
     margin-bottom: 12px;
 }
 
-/* TÍTULO */
 .event-card h3 {
     font-size: 26px;
     margin-bottom: 8px;
@@ -392,7 +485,6 @@ footer {
     text-shadow: 0 0 6px rgba(0,0,0,0.6);
 }
 
-/* DESCRIPCIÓN MINIMALISTA */
 .event-card p {
     font-size: 17px;
     color: #e9d3f5;
@@ -401,20 +493,66 @@ footer {
     line-height: 1.4;
 }
 
-/* EFECTO HOVER MINIMALISTA (OPCIONAL) */
 .event-card:hover {
     transform: translateY(-6px);
 }
 
 /* ==========================================================
+   SELECTOR DE IDIOMA
+========================================================== */
+#language-selector {
+    position: fixed;
+    top: 12px;
+    right: 18px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    padding: 8px 16px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    z-index: 999999;
+}
+
+#language-selector span {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+#language-selector .separator {
+    color: #f5cde8;
+    font-weight: bold;
+}
+
+/* ==========================================================
    RESPONSIVE
 ========================================================== */
+@media (max-width: 850px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    #language-selector {
+        right: 70px;
+    }
+}
+
 @media (max-width: 600px) {
     .hero h1 { font-size: 40px; }
     .event-types-section h2 { font-size: 36px; }
     .event-card { padding: 22px; }
     .carta-img { height: 200px; }
 }
+
+
+
+
+
+
 
 
 
