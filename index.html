@@ -41,6 +41,29 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="assets/logo.png" type="image/png">
 
+    <style>
+        /* 🔥 Estilos del Bot del Chat */
+        #chatbot-btn {
+            width: 40px;
+            height: 40px;
+            margin-left: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        #chatbot-btn:hover {
+            transform: scale(1.15);
+        }
+
+        /* Ajuste responsive */
+        @media (max-width: 768px) {
+            #chatbot-btn {
+                width: 34px;
+                height: 34px;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -72,12 +95,15 @@
             <span onclick="setLanguage('en')">🇬🇧 EN</span>
         </div>
 
-        <!-- BOTÓN HAMBURGUESA SIEMPRE VISIBLE -->
+        <!-- BOTÓN HAMBURGUESA -->
         <div class="hamburger" id="hamburger">
             <div class="line1"></div>
             <div class="line2"></div>
             <div class="line3"></div>
         </div>
+
+        <!-- 🤖 BOT PREMIUM (pos A2) -->
+        <img id="chatbot-btn" src="assets/robot.png" alt="Chatbot Yassir">
 
     </header>
 
@@ -108,7 +134,7 @@
     </section>
 
     <!-- ============================= -->
-    <!-- 🔥 SECCIÓN SOBRE NOSOTROS (CORREGIDA) -->
+    <!-- 🔥 SECCIÓN SOBRE NOSOTROS -->
     <!-- ============================= -->
     <section id="nosotros" class="sobre-nosotros-section fade-up">
 
@@ -388,9 +414,19 @@
         cargarTestimonios();
     </script>
 
+    <!-- BOTÓN CHAT -->
+    <script>
+        document.getElementById("chatbot-btn").addEventListener("click", () => {
+            window.location.href = "http://localhost:5173";
+        });
+    </script>
+
+
 </body>
 
 </html>
+
+
 
 
 
