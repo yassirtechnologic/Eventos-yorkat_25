@@ -549,19 +549,17 @@ footer {
 }
 
 /* ==========================================================
-   CHATBOT - POSICIÓN SUPERIOR (NO TAPA IDIOMAS)
-=========================================================== */
+   CHATBOT - DENTRO DEL NAVBAR (VISIBLE Y SIN TAPAR IDIOMAS)
+========================================================== */
 #chatbot-btn {
-    position: fixed;
-    top: 14px;
-    right: 120px; /* separación del selector de idiomas */
-
     width: 40px;
     height: 40px;
-
     cursor: pointer;
-    z-index: 999998; /* debajo del idioma, encima del navbar */
 
+    /* clave */
+    margin-left: 10px;
+
+    /* visual */
     transition: transform 0.25s ease-in-out;
 }
 
@@ -569,10 +567,9 @@ footer {
     transform: scale(1.15);
 }
 
+/* Responsive */
 @media (max-width: 850px) {
     #chatbot-btn {
-        top: 12px;
-        right: 70px; /* coincide con el idioma en móvil */
         width: 34px;
         height: 34px;
     }
