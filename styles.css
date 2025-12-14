@@ -549,13 +549,19 @@ footer {
 }
 
 /* ==========================================================
-   CHATBOT - BOTÓN A LA DERECHA DEL HAMBURGUESA
+   CHATBOT - POSICIÓN SUPERIOR (NO TAPA IDIOMAS)
 =========================================================== */
 #chatbot-btn {
+    position: fixed;
+    top: 14px;
+    right: 120px; /* separación del selector de idiomas */
+
     width: 40px;
     height: 40px;
-    margin-left: 12px;
+
     cursor: pointer;
+    z-index: 999998; /* debajo del idioma, encima del navbar */
+
     transition: transform 0.25s ease-in-out;
 }
 
@@ -565,6 +571,8 @@ footer {
 
 @media (max-width: 850px) {
     #chatbot-btn {
+        top: 12px;
+        right: 70px; /* coincide con el idioma en móvil */
         width: 34px;
         height: 34px;
     }
