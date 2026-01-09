@@ -12,19 +12,45 @@ async function sendMessage() {
 
   if (!input.value) return;
 
-  messages.innerHTML += `<div class="msg"><strong>Tú:</strong> ${input.value}</div>`;
+  const userMessage = input.value;
 
-  const prompt = input.value;
+  messages.innerHTML += `
+    <div class="msg">
+      <strong>Tú:</strong> ${userMessage}
+    </div>
+  `;
+
   input.value = "";
 
-  const response = await fetch("https://tu-backend-aqui.com/api/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt })
-  });
+  try {
+    const response = await fetch(
+      "https://yassirbot-backend.onrender.com/chat",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: userMessage
+        })
+      }
+    );
 
-  const data = await response.json();
+    const data = await response.json();
 
-  messages.innerHTML += `<div class="msg"><strong>Yassir:</strong> ${data.reply}</div>`;
-  messages.scrollTop = messages.scrollHeight;
+    messages.innerHTML += `
+      <div class="msg">
+        <strong>Yassir:</strong> ${data.reply}
+      </div>
+    `;
+
+    messages.scrollTop = messages.scrollHeight;
+
+  } catch (error) {
+    messages.innerHTML += `
+      <div class="msg">
+        <strong>Error:</strong> No se pudo conectar con el servidor.
+      </div>
+    `;
+  }
 }
