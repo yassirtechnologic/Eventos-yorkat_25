@@ -414,12 +414,31 @@
         cargarTestimonios();
     </script>
 
-    <!-- BOTÓN CHAT -->
-    <script>
-        document.getElementById("chatbot-btn").addEventListener("click", () => {
-            window.location.href = "https://yassirtechnologic.github.io/yassir-universal-ai-chatbot/";
-        });
-    </script>
+    <!-- CHATBOT -->
+<link rel="stylesheet" href="chat/chat.css">
+
+<div id="chat-root"></div>
+
+<script>
+  fetch("chat/chat.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("chat-root").innerHTML = html;
+    });
+</script>
+
+<script src="chat/chat.js"></script>
+
+<script>
+  document.getElementById("chatbot-btn").addEventListener("click", () => {
+    const chat = document.getElementById("chat-overlay");
+    if (chat) {
+      openChat();
+    } else {
+      alert("El chat aún se está cargando, intenta de nuevo en un segundo.");
+    }
+  });
+</script>
 
 
 </body>
