@@ -1,13 +1,22 @@
-<div id="chat-overlay" class="chat-overlay hidden">
+<div id="chat-overlay" class="hidden">
   <div class="chat-container">
-    <div class="header">
-      🤖 Yassir – Chatbot
-      <span class="close-btn" onclick="closeChat()">✖</span>
+
+    <div class="chat-header">
+      Eventos York & Katy
+      <button class="clear-btn" onclick="closeChat()">✖</button>
     </div>
 
-    <div id="messages"></div>
+    <div id="messages" class="chat-messages"></div>
 
-    <input id="prompt" placeholder="Escribe tu mensaje..." />
-    <button onclick="sendMessage()">Enviar</button>
+    <div class="chat-input">
+      <input
+        id="prompt"
+        type="text"
+        placeholder="Escribe tu mensaje..."
+        onkeydown="if(event.key==='Enter') sendMessage()"
+      />
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+
   </div>
 </div>

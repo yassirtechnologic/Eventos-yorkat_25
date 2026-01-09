@@ -10,37 +10,34 @@ async function sendMessage() {
   const input = document.getElementById("prompt");
   const messages = document.getElementById("messages");
 
-  if (!input.value) return;
+  if (!input.value.trim()) return;
 
   const userMessage = input.value;
 
   messages.innerHTML += `
-    <div class="msg">
-      <strong>Tú:</strong> ${userMessage}
+    <div class="msg-row user">
+      <div class="chat-bubble user">${userMessage}</div>
     </div>
   `;
 
   input.value = "";
+  messages.scrollTop = messages.scrollHeight;
 
   try {
     const response = await fetch(
       "https://yassirbot-backend.onrender.com/chat",
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          message: userMessage
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: userMessage })
       }
     );
 
     const data = await response.json();
 
     messages.innerHTML += `
-      <div class="msg">
-        <strong>Yassir:</strong> ${data.reply}
+      <div class="msg-row bot">
+        <div class="chat-bubble bot">${data.reply}</div>
       </div>
     `;
 
@@ -48,8 +45,10 @@ async function sendMessage() {
 
   } catch (error) {
     messages.innerHTML += `
-      <div class="msg">
-        <strong>Error:</strong> No se pudo conectar con el servidor.
+      <div class="msg-row bot">
+        <div class="chat-bubble bot">
+          ❌ Error de conexión con el servidor
+        </div>
       </div>
     `;
   }
