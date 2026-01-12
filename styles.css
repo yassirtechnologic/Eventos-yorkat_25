@@ -852,11 +852,7 @@ footer {
 #carta,
 #testimonios,
 #contacto {
-    background: linear-gradient(
-        rgba(0,0,0,0.65),
-        rgba(0,0,0,0.65)
-    ),
-    url("assets/fondo_app_eventos.png") center/cover fixed;
+    background: url("assets/fondo_app_eventos.png") center / cover fixed;
     color: white;
 }
 
