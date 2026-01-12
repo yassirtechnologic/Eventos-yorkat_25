@@ -447,32 +447,6 @@
         cargarTestimonios();
     </script>
 
-    <!-- CHATBOT -->
-<link rel="stylesheet" href="chat/chat.css">
-
-<div id="chat-root"></div>
-
-<script>
-  fetch("chat/chat.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("chat-root").innerHTML = html;
-    });
-</script>
-
-<script src="chat/chat.js"></script>
-
-<script>
-  document.getElementById("chatbot-btn").addEventListener("click", () => {
-    const chat = document.getElementById("chat-overlay");
-    if (chat) {
-      openChat();
-    } else {
-      alert("El chat aún se está cargando, intenta de nuevo en un segundo.");
-    }
-  });
-</script>
-
 <!-- MODAL TESTIMONIOS -->
 <div id="modal-testimonios" class="modal-testimonios">
     <div class="modal-content">
@@ -495,11 +469,46 @@
   </svg>
 </a>
 
-</body>
-</html>
+<!-- MODAL CHATBOT -->
+<div id="chatbot-modal" class="chatbot-modal">
+    <div class="chatbot-box">
+        <button id="chatbot-close" aria-label="Cerrar chat">×</button>
+
+        <iframe
+            src="https://yassir-chatbot-frontend-vite.vercel.app"
+            title="Yassir AI Chatbot"
+            loading="lazy"
+        ></iframe>
+    </div>
+</div>
+
+<script>
+const chatbotBtn = document.getElementById("chatbot-btn");
+const chatbotModal = document.getElementById("chatbot-modal");
+const chatbotClose = document.getElementById("chatbot-close");
+
+if (chatbotBtn && chatbotModal && chatbotClose) {
+
+    chatbotBtn.addEventListener("click", () => {
+        chatbotModal.classList.add("active");
+    });
+
+    chatbotClose.addEventListener("click", () => {
+        chatbotModal.classList.remove("active");
+    });
+
+    chatbotModal.addEventListener("click", (e) => {
+        if (e.target === chatbotModal) {
+            chatbotModal.classList.remove("active");
+        }
+    });
+
+} else {
+    console.warn("⚠️ Bot: algún elemento no existe en el DOM");
+}
+</script>
 
 </body>
-
 </html>
 
 
