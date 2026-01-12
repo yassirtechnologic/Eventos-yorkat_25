@@ -71,57 +71,62 @@
     <!-- NAVBAR -->
     <header class="navbar">
 
-        <!-- LOGO -->
-        <img src="assets/logo.png" class="logo" id="adminTrigger">
+    <!-- IZQUIERDA -->
+    <div class="nav-left">
+        <img src="assets/logo.png" class="logo" id="adminTrigger" alt="Eventos York & Katy">
+    </div>
 
-        <!-- NAVEGACIÓN DESKTOP -->
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#inicio" data-translate="navInicio">Inicio</a></li>
-                <li><a href="#nosotros" data-translate="navNosotros">Sobre Nosotros</a></li>
-                <li><a href="#servicios" data-translate="navServicios">Servicios</a></li>
-                <li><a href="#eventos" data-translate="navEventos">Eventos</a></li>
-                <li><a href="#galeria" data-translate="navGaleria">Publicaciones</a></li>
-                <li><a href="#carta" data-translate="navCarta">Carta</a></li>
-                <li><a href="#testimonios" data-translate="navTestimonios">Testimonios</a></li>
-                <li><a href="#contacto" data-translate="navContacto">Contacto</a></li>
-            </ul>
-        </nav>
+    <!-- CENTRO (DESKTOP) -->
+    <nav class="nav-desktop">
+        <ul class="nav-links">
+        <li><a href="#inicio" data-translate="navInicio">Inicio</a></li>
+        <li><a href="#nosotros" data-translate="navNosotros">Sobre Nosotros</a></li>
+        <li><a href="#servicios" data-translate="navServicios">Servicios</a></li>
+        <li><a href="#eventos" data-translate="navEventos">Eventos</a></li>
+        <li><a href="#galeria" data-translate="navGaleria">Publicaciones</a></li>
+        <li><a href="#carta" data-translate="navCarta">Carta</a></li>
+        <li><a href="#testimonios" data-translate="navTestimonios">Testimonios</a></li>
+        <li><a href="#contacto" data-translate="navContacto">Contacto</a></li>
+        </ul>
+    </nav>
 
-        <!-- SELECTOR DE IDIOMA -->
-        <div id="language-selector">
-            <span onclick="setLanguage('es')">🇪🇸 ES</span>
-            <span class="separator">|</span>
-            <span onclick="setLanguage('en')">🇬🇧 EN</span>
+    <!-- DERECHA -->
+    <div class="nav-right">
+
+        <!-- IDIOMAS -->
+        <div class="language-selector">
+        <button onclick="setLanguage('es')">🇪🇸</button>
+        <button onclick="setLanguage('en')">🇬🇧</button>
         </div>
 
-        <!-- BOTÓN HAMBURGUESA -->
+        <!-- BOT CHAT -->
+        <img id="chatbot-btn" src="assets/bot_yassir.png" alt="Chatbot">
+
+        <!-- HAMBURGER -->
         <div class="hamburger" id="hamburger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
+        <span></span>
+        <span></span>
+        <span></span>
         </div>
 
-        <!-- 🤖 BOT PREMIUM (pos A2) -->
-        <img id="chatbot-btn" src="assets/bot_yassir.png" alt="Chatbot Yassir">
-
+    </div>
     </header>
 
     <!-- MENÚ MÓVIL -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#inicio" onclick="closeMenu()" data-translate="navInicio">Inicio</a>
-        <a href="#nosotros" onclick="closeMenu()" data-translate="navNosotros">Sobre Nosotros</a>
-        <a href="#servicios" onclick="closeMenu()" data-translate="navServicios">Servicios</a>
-        <a href="#eventos" onclick="closeMenu()" data-translate="navEventos">Eventos</a>
-        <a href="#galeria" onclick="closeMenu()" data-translate="navGaleria">Publicaciones</a>
-        <a href="#carta" onclick="closeMenu()" data-translate="navCarta">Carta</a>
-        <a href="#testimonios" onclick="closeMenu()" data-translate="navTestimonios">Testimonios</a>
-        <a href="#contacto" onclick="closeMenu()" data-translate="navContacto">Contacto</a>
+    <a href="#inicio" onclick="closeMenu()" data-translate="navInicio">Inicio</a>
+    <a href="#nosotros" onclick="closeMenu()" data-translate="navNosotros">Sobre Nosotros</a>
+    <a href="#servicios" onclick="closeMenu()" data-translate="navServicios">Servicios</a>
+    <a href="#eventos" onclick="closeMenu()" data-translate="navEventos">Eventos</a>
+    <a href="#galeria" onclick="closeMenu()" data-translate="navGaleria">Publicaciones</a>
+    <a href="#carta" onclick="closeMenu()" data-translate="navCarta">Carta</a>
+    <a href="#testimonios" onclick="closeMenu()" data-translate="navTestimonios">Testimonios</a>
+    <a href="#contacto" onclick="closeMenu()" data-translate="navContacto">Contacto</a>
 
-        <hr style="border-color: rgba(255,255,255,0.4); margin: 12px 0;">
-
-        <a onclick="setLanguage('es')">🇪🇸 Español</a>
-        <a onclick="setLanguage('en')">🇬🇧 English</a>
+    <div class="mobile-langs">
+        <button onclick="setLanguage('es')">🇪🇸 Español</button>
+        <button onclick="setLanguage('en')">🇬🇧 English</button>
+    </div>
     </div>
 
     <!-- HERO -->
@@ -162,22 +167,45 @@
 
     </section>
 
-    <!-- RESTO DE LA WEB -->
-    <div class="section-bg">
+    <!-- SERVICIOS -->
+    <section id="servicios" class="servicios">
+        <h2 class="fade-up" data-translate="servicesTitle">Nuestros Servicios</h2>
 
-        <!-- SERVICIOS -->
-        <section id="servicios" class="servicios">
-            <h2 class="fade-up" data-translate="servicesTitle">Nuestros Servicios</h2>
+        <div class="servicios-grid servicios-iconos fade-up">
 
-            <div class="servicios-grid">
-                <div class="servicio-card fade-up" data-translate="servicio1">Organización de Eventos</div>
-                <div class="servicio-card fade-up" data-translate="servicio2">Decoración</div>
-                <div class="servicio-card fade-up" data-translate="servicio3">Catering</div>
-                <div class="servicio-card fade-up" data-translate="servicio4">Música & DJ</div>
-                <div class="servicio-card fade-up" data-translate="servicio5">Fotografía</div>
-                <div class="servicio-card fade-up" data-translate="servicio6">Diseño Personalizado</div>
+            <div class="servicio-icon-card">
+                <span class="servicio-icon">🎉</span>
+                <h3 data-translate="servicio1">Organización de Eventos</h3>
             </div>
-        </section>
+
+            <div class="servicio-icon-card">
+                <span class="servicio-icon">🎈</span>
+                <h3 data-translate="servicio2">Decoración</h3>
+            </div>
+
+            <div class="servicio-icon-card">
+                <span class="servicio-icon">🍽️</span>
+                <h3 data-translate="servicio3">Catering</h3>
+            </div>
+
+            <div class="servicio-icon-card">
+                <span class="servicio-icon">🎧</span>
+                <h3 data-translate="servicio4">Música & DJ</h3>
+            </div>
+
+            <div class="servicio-icon-card">
+                <span class="servicio-icon">📸</span>
+                <h3 data-translate="servicio5">Fotografía</h3>
+            </div>
+
+            <div class="servicio-icon-card">
+                <span class="servicio-icon">🎨</span>
+                <h3 data-translate="servicio6">Diseño Personalizado</h3>
+            </div>
+
+        </div>
+    </section>
+
 
         <!-- TIPOS DE EVENTOS -->
         <section id="eventos" class="event-types-section fade-up">
@@ -279,6 +307,11 @@
             </div>
 
             <div id="testimonios-grid" class="testimonios-grid"></div>
+            
+            <button class="btn btn-ver-testimonios" onclick="abrirTestimonios()">
+            Ver todos los comentarios
+        </button>
+
         </section>
 
         <!-- CONTACTO -->
@@ -440,6 +473,30 @@
   });
 </script>
 
+<!-- MODAL TESTIMONIOS -->
+<div id="modal-testimonios" class="modal-testimonios">
+    <div class="modal-content">
+        <span class="cerrar-modal" onclick="cerrarTestimonios()">×</span>
+        <h3>Opiniones de nuestros clientes</h3>
+
+        <div id="modal-testimonios-grid"></div>
+    </div>
+</div>
+
+<!-- WHATSAPP FLOTANTE -->
+<a
+  href="https://wa.me/34666030923"
+  target="_blank"
+  id="whatsapp-float"
+  aria-label="Contactar por WhatsApp"
+>
+  <svg viewBox="0 0 32 32" width="28" height="28" fill="white">
+    <path d="M16.04 2.003c-7.732 0-14.037 6.305-14.037 14.037 0 2.478.652 4.9 1.893 7.04L2 30l7.108-1.864c2.07 1.13 4.398 1.723 6.93 1.723 7.73 0 14.037-6.305 14.037-14.037S23.77 2.003 16.04 2.003zm0 25.53c-2.24 0-4.437-.602-6.35-1.74l-.455-.27-4.218 1.107 1.125-4.11-.297-.422c-1.158-1.65-1.77-3.59-1.77-5.607 0-5.51 4.485-9.995 9.995-9.995s9.995 4.485 9.995 9.995-4.486 9.995-9.995 9.995zm5.49-7.487c-.297-.15-1.76-.87-2.033-.97-.273-.1-.473-.15-.673.15-.2.297-.773.97-.95 1.17-.173.2-.347.223-.643.074-.297-.15-1.253-.462-2.387-1.473-.883-.79-1.48-1.764-1.653-2.06-.173-.297-.018-.457.13-.606.134-.133.297-.347.447-.52.15-.174.2-.297.3-.497.1-.2.05-.372-.025-.52-.075-.15-.673-1.62-.922-2.217-.242-.582-.487-.503-.673-.513l-.573-.01c-.2 0-.52.075-.793.372-.273.297-1.04 1.02-1.04 2.487 0 1.467 1.067 2.884 1.213 3.083.15.2 2.1 3.205 5.08 4.49.71.307 1.263.49 1.694.627.712.226 1.36.194 1.87.118.57-.085 1.76-.72 2.01-1.413.248-.693.248-1.287.173-1.413-.075-.125-.273-.2-.57-.35z"/>
+  </svg>
+</a>
+
+</body>
+</html>
 
 </body>
 

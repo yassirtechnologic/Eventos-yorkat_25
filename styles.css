@@ -14,37 +14,41 @@ body {
     overflow-x: hidden;
 }
 
-/* ==========================================================
-   NAVBAR PREMIUM ULTRA SLIM
+/* ========================================================== 
+   NAVBAR PREMIUM ULTRA SLIM — FIXED & RESPONSIVE
 ========================================================== */
 .navbar {
     position: sticky;
     top: 0;
     width: 100%;
-    padding: 8px 40px;
+    height: 55px;
+    padding: 8px 20px;
     background: #ff4f9a;
     box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     display: flex;
     align-items: center;
-    gap: 25px;
+    justify-content: space-between;
     z-index: 9999;
-    height: 55px;
 }
 
+/* LOGO */
 .logo {
     width: 42px;
     cursor: pointer;
 }
 
+/* ==========================================================
+   NAV LINKS (DESKTOP)
+========================================================== */
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 24px;
+    gap: 22px;
     align-items: center;
 }
 
 .nav-links a {
-    color: #fff !important;
+    color: #fff;
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
@@ -59,19 +63,48 @@ body {
 }
 
 /* ==========================================================
-   HAMBURGUESA (SIEMPRE VISIBLE)
+   RIGHT ZONE (IDIOMAS + CHAT + HAMBURGER)
+========================================================== */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* IDIOMAS */
+.language-selector {
+    display: flex;
+    gap: 6px;
+}
+
+.language-selector span,
+.language-selector button {
+    cursor: pointer;
+    font-size: 16px;
+    background: none;
+    border: none;
+    color: #fff;
+}
+
+/* CHATBOT */
+#chatbot-btn {
+    width: 34px;
+    cursor: pointer;
+}
+
+/* ==========================================================
+   HAMBURGUESA
 ========================================================== */
 .hamburger {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 4px;
     cursor: pointer;
-    margin-left: auto;
     z-index: 10000;
 }
 
 .hamburger div {
-    width: 28px;
+    width: 26px;
     height: 3px;
     background: white;
     border-radius: 4px;
@@ -102,7 +135,7 @@ body {
     padding-top: 80px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
     transition: 0.35s ease;
     z-index: 99999;
     box-shadow: -4px 0 20px rgba(0,0,0,0.3);
@@ -115,13 +148,39 @@ body {
 .mobile-menu a {
     color: white;
     text-decoration: none;
-    font-size: 20px;
-    padding: 12px 24px;
+    font-size: 18px;
+    padding: 12px 22px;
     transition: 0.3s;
 }
 
 .mobile-menu a:hover {
     background: rgba(255,255,255,0.2);
+}
+
+/* ==========================================================
+   RESPONSIVE BREAKPOINTS
+========================================================== */
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+    .hamburger {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+    }
+}
+
+/* MÓVIL Y TABLET */
+@media (max-width: 1023px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
 }
 
 /* ==========================================================
@@ -498,36 +557,6 @@ footer {
 }
 
 /* ==========================================================
-   SELECTOR DE IDIOMA
-========================================================== */
-#language-selector {
-    position: fixed;
-    top: 12px;
-    right: 18px;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(8px);
-    padding: 8px 16px;
-    border-radius: 40px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-    z-index: 999999;
-}
-
-#language-selector span {
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
-}
-
-#language-selector .separator {
-    color: #f5cde8;
-    font-weight: bold;
-}
-
-/* ==========================================================
    RESPONSIVE
 ========================================================== */
 @media (max-width: 850px) {
@@ -575,6 +604,248 @@ footer {
     }
 }
 
+/* ==========================================================
+   RESPONSIVE FIX — HERO + SOBRE NOSOTROS
+   (NO reemplaza, solo adapta)
+========================================================== */
+
+/* Ajuste general móvil */
+@media (max-width: 768px) {
+
+    .hero {
+        height: auto;
+        min-height: calc(100vh - 55px);
+        padding: 60px 16px;
+    }
+
+    .hero-content {
+        padding: 26px 20px;
+        border-radius: 14px;
+    }
+
+    .hero h1 {
+        font-size: clamp(30px, 7vw, 40px);
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .btn {
+        font-size: 16px;
+        padding: 14px 24px;
+    }
+
+    /* SOBRE NOSOTROS */
+    #nosotros {
+        padding: 80px 18px;
+        background-attachment: scroll;
+    }
+
+    #nosotros h2 {
+        font-size: clamp(28px, 6vw, 36px);
+    }
+
+    #nosotros img {
+        width: 130px;
+    }
+
+    #nosotros p {
+        font-size: 16px;
+        max-width: 100%;
+    }
+}
+
+/* MÓVIL PEQUEÑO */
+@media (max-width: 480px) {
+    .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* ==========================================================
+   RESPONSIVE FIX — CARTA
+========================================================== */
+@media (max-width: 768px) {
+
+    .carta-grid {
+        gap: 22px;
+        padding: 12px;
+    }
+
+    .carta-img {
+        height: 200px;
+    }
+
+    .carta-item h3 {
+        font-size: 20px;
+    }
+
+    .carta-item p {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .carta-img {
+        height: 180px;
+    }
+}
+
+/* ==========================================================
+   BOTÓN VER TESTIMONIOS
+========================================================== */
+.btn-ver-testimonios {
+    display: block;
+    margin: 40px auto 0;
+}
+
+/* ==========================================================
+   MODAL TESTIMONIOS
+========================================================== */
+.modal-testimonios {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+}
+
+.modal-testimonios.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 18px;
+    padding: 30px;
+    position: relative;
+}
+
+.modal-content h3 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #ff4f9a;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* TESTIMONIOS DENTRO DEL MODAL */
+#modal-testimonios-grid {
+    display: grid;
+    gap: 22px;
+}
+
+.modal-testimonio {
+    background: #f7f7f7;
+    padding: 18px;
+    border-radius: 12px;
+}
+
+.modal-testimonio h4 {
+    margin-bottom: 6px;
+}
+
+.modal-testimonio p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.modal-testimonio .estrellas {
+    margin-top: 6px;
+}
+
+/* MÓVIL */
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 22px 18px;
+    }
+}
+
+#whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 58px;
+    height: 58px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    z-index: 999998;
+}
+
+/* ==========================================================
+   HERO — ELIMINAR TARJETA OSCURA
+========================================================== */
+.hero-content {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    backdrop-filter: none;
+    box-shadow: none;
+}
+
+/* ==========================================================
+   SERVICIOS — ICONOS (IGUAL A TIPOS DE EVENTOS)
+========================================================== */
+
+.servicios-iconos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.servicio-icon-card {
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.servicio-icon-card:hover {
+    transform: translateY(-6px);
+}
+
+.servicio-icon {
+    font-size: 64px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.servicio-icon-card h3 {
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .servicio-icon {
+        font-size: 52px;
+    }
+
+    .servicio-icon-card h3 {
+        font-size: 20px;
+    }
+}
 
 
 
