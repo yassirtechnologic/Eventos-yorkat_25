@@ -904,6 +904,25 @@ footer {
     }
 }
 
+.chatbot-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.55);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 1000000;
+}
+
+.chatbot-close:hover {
+    background: rgba(0,0,0,0.8);
+}
+
 
 
 

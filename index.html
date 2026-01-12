@@ -469,47 +469,79 @@
   </svg>
 </a>
 
-<!-- MODAL CHATBOT -->
+<!-- ===============================
+     MODAL CHATBOT — LIMPIO Y FINAL
+================================= -->
 <div id="chatbot-modal" class="chatbot-modal">
     <div class="chatbot-box">
-        <button id="chatbot-close" aria-label="Cerrar chat">×</button>
 
+        <!-- BOTÓN CERRAR / VOLVER -->
+        <button class="chatbot-close" id="chatbot-close" aria-label="Cerrar chat">
+            ✕
+        </button>
+
+        <!-- BOT (iframe) -->
         <iframe
             src="https://yassir-chatbot-frontend-vite.vercel.app"
             title="Yassir AI Chatbot"
-            loading="lazy"
-        ></iframe>
+            loading="lazy">
+        </iframe>
+
     </div>
 </div>
 
 <script>
-const chatbotBtn = document.getElementById("chatbot-btn");
-const chatbotModal = document.getElementById("chatbot-modal");
-const chatbotClose = document.getElementById("chatbot-close");
+document.addEventListener("DOMContentLoaded", () => {
 
-if (chatbotBtn && chatbotModal && chatbotClose) {
+    const chatbotBtn = document.getElementById("chatbot-btn");
+    const chatbotModal = document.getElementById("chatbot-modal");
+    const chatbotClose = document.getElementById("chatbot-close");
 
+    if (!chatbotBtn || !chatbotModal || !chatbotClose) {
+        console.warn("⚠️ Chatbot: elementos no encontrados");
+        return;
+    }
+
+    // Abrir chatbot
     chatbotBtn.addEventListener("click", () => {
         chatbotModal.classList.add("active");
     });
 
+    // Cerrar con botón
     chatbotClose.addEventListener("click", () => {
         chatbotModal.classList.remove("active");
     });
 
+    // Cerrar al hacer clic fuera
     chatbotModal.addEventListener("click", (e) => {
         if (e.target === chatbotModal) {
             chatbotModal.classList.remove("active");
         }
     });
 
-} else {
-    console.warn("⚠️ Bot: algún elemento no existe en el DOM");
-}
+});
 </script>
 
-</body>
-</html>
+<script>
+const chatbotBtn = document.getElementById("chatbot-btn");
+const chatbotModal = document.getElementById("chatbot-modal");
+const chatbotClose = document.getElementById("chatbot-close");
+
+chatbotBtn.addEventListener("click", () => {
+    chatbotModal.classList.add("active");
+});
+
+chatbotClose.addEventListener("click", () => {
+    chatbotModal.classList.remove("active");
+});
+
+// cerrar tocando fondo
+chatbotModal.addEventListener("click", (e) => {
+    if (e.target === chatbotModal) {
+        chatbotModal.classList.remove("active");
+    }
+});
+</script>
 
 
 
