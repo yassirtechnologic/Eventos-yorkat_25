@@ -86,12 +86,6 @@ body {
     color: #fff;
 }
 
-/* CHATBOT */
-#chatbot-btn {
-    width: 34px;
-    cursor: pointer;
-}
-
 /* ==========================================================
    HAMBURGUESA
 ========================================================== */
@@ -196,14 +190,6 @@ body {
     color: white;
 }
 
-.hero-content {
-    background: rgba(0,0,0,0.45);
-    padding: 45px;
-    border-radius: 16px;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
 .hero h1 {
     font-size: 58px;
     text-shadow: 0 0 14px rgba(0,0,0,0.7);
@@ -289,38 +275,6 @@ h2 {
     line-height: 1.5;
     color: #ffeaff;
     text-shadow: 0 0 6px rgba(0,0,0,0.6);
-}
-
-/* ==========================================================
-   SERVICIOS
-========================================================== */
-.servicios {
-    color: white;
-}
-
-.servicios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 35px;
-    padding: 20px;
-}
-
-.servicio-card {
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0;
-    text-align: center;
-    color: #ffeaff;
-    font-size: 22px;
-    font-weight: bold;
-    transition: 0.3s ease;
-    text-shadow: 0 0 8px rgba(0,0,0,0.6);
-}
-
-.servicio-card:hover {
-    transform: translateY(-6px);
-    opacity: 0.85;
 }
 
 /* ==========================================================
@@ -578,17 +532,13 @@ footer {
 }
 
 /* ==========================================================
-   CHATBOT - DENTRO DEL NAVBAR (VISIBLE Y SIN TAPAR IDIOMAS)
+   CHATBOT BUTTON (FINAL)
 ========================================================== */
 #chatbot-btn {
     width: 40px;
     height: 40px;
+    margin-left: 12px;
     cursor: pointer;
-
-    /* clave */
-    margin-left: 10px;
-
-    /* visual */
     transition: transform 0.25s ease-in-out;
 }
 
@@ -596,8 +546,7 @@ footer {
     transform: scale(1.15);
 }
 
-/* Responsive */
-@media (max-width: 850px) {
+@media (max-width: 768px) {
     #chatbot-btn {
         width: 34px;
         height: 34px;
@@ -845,6 +794,23 @@ footer {
     .servicio-icon-card h3 {
         font-size: 20px;
     }
+}
+
+/* ==========================================================
+   FONDO GLOBAL — SECCIONES RESTANTES
+========================================================== */
+
+#servicios,
+#galeria,
+#carta,
+#testimonios,
+#contacto {
+    background: linear-gradient(
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.65)
+    ),
+    url("assets/fondo_app_eventos.png") center/cover fixed;
+    color: white;
 }
 
 
