@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* ============================
-           PANEL ADMIN PREMIUM
-        ============================= */
-
         body {
             background: url("assets/fondo1.png") center/cover fixed;
             color: white;
@@ -28,32 +24,27 @@
             text-align: center;
         }
 
-        #adminPanel h2 {
+        h2 {
             font-size: 42px;
             margin-bottom: 30px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.6);
         }
 
-        #adminPanel h3 {
+        h3 {
             margin-top: 25px;
             font-size: 26px;
             color: #ff7fbd;
-            text-shadow: 0 0 10px rgba(255,0,120,0.4);
         }
 
-        #adminPanel input,
-        #adminPanel textarea {
+        input, textarea {
             width: 100%;
             padding: 14px;
             border-radius: 12px;
             border: none;
             margin-top: 12px;
             font-size: 18px;
-            color: #333;
-            box-shadow: 0 0 8px rgba(255,255,255,0.2);
         }
 
-        #adminPanel textarea {
+        textarea {
             height: 120px;
             resize: none;
         }
@@ -62,142 +53,111 @@
             margin-top: 18px;
             background: #ff4f9a;
             color: white;
-            padding: 14px 25px;
+            padding: 14px;
             border-radius: 10px;
             border: none;
             font-size: 18px;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 0 14px rgba(255,80,160,0.5);
             width: 100%;
         }
 
-        .btn-admin:hover {
-            transform: scale(1.04);
-            box-shadow: 0 0 22px rgba(255,100,180,0.75);
+        .logout-btn {
+            background: #ff7f50;
         }
 
         hr {
             margin: 40px 0;
-            border: none;
             height: 2px;
             background: rgba(255,255,255,0.2);
-            border-radius: 50px;
-        }
-
-        .logout-btn {
-            margin-top: 30px;
-            background: #ff7f50;
+            border: none;
         }
     </style>
+
+    <!-- 🔐 PROTECCIÓN DEL PANEL -->
+    <script>
+        if (localStorage.getItem("adminAuth") !== "true") {
+            window.location.href = "admin-login.html";
+        }
+    </script>
 </head>
 
 <body>
 
-    <section id="adminPanel" class="fade-up">
+<section id="adminPanel">
 
-        <h2>Panel de Administración</h2>
+    <h2>Panel de Administración</h2>
 
-        <!-- PUBLICAR NUEVA PUBLICACIÓN -->
-        <h3>Agregar Nueva Publicación</h3>
-        <input type="text" id="pubComentario" placeholder="Comentario de la publicación">
-        <button class="btn-admin" onclick="guardarPublicacion()">Guardar Publicación</button>
+    <h3>Agregar Nueva Publicación</h3>
+    <input type="text" id="pubComentario" placeholder="Comentario de la publicación">
+    <button class="btn-admin" onclick="guardarPublicacion()">Guardar Publicación</button>
 
-        <hr>
+    <hr>
 
-        <!-- AGREGAR NUEVO TESTIMONIO -->
-        <h3>Agregar Testimonio Manual</h3>
-        <input type="text" id="testNombre" placeholder="Nombre del cliente">
-        <textarea id="testTexto" placeholder="Testimonio"></textarea>
-        <input type="number" id="testEstrellas" placeholder="Estrellas (1-5)" min="1" max="5">
-        <button class="btn-admin" onclick="guardarTestimonioAdmin()">Guardar Testimonio</button>
+    <h3>Agregar Testimonio</h3>
+    <input type="text" id="testNombre" placeholder="Nombre del cliente">
+    <textarea id="testTexto" placeholder="Testimonio"></textarea>
+    <input type="number" id="testEstrellas" placeholder="Estrellas (1-5)" min="1" max="5">
+    <button class="btn-admin" onclick="guardarTestimonioAdmin()">Guardar Testimonio</button>
 
-        <button class="btn-admin logout-btn" onclick="salirAdmin()">Cerrar Sesión</button>
-    </section>
+    <button class="btn-admin logout-btn" onclick="salirAdmin()">Cerrar Sesión</button>
 
-    <!-- FIREBASE -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { 
-            getFirestore, collection, addDoc 
-        } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+</section>
 
-        import { getAuth, signOut } 
-        from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+<!-- FIREBASE SOLO PARA DATOS -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyB_GFvlW4hrZ1fTAz8kB-6dybi83jVRmaQ",
-            authDomain: "striped-smile-475414-v0.firebaseapp.com",
-            projectId: "striped-smile-475414-v0",
-            storageBucket: "striped-smile-475414-v0.firebasestorage.app",
-            messagingSenderId: "354814109895",
-            appId: "1:354814109895:web:0fce975ddb6c180f1df6e2"
-        };
+    const firebaseConfig = {
+        apiKey: "AIzaSyB_GFvlW4hrZ1fTAz8kB-6dybi83jVRmaQ",
+        authDomain: "striped-smile-475414-v0.firebaseapp.com",
+        projectId: "striped-smile-475414-v0",
+        storageBucket: "striped-smile-475414-v0.firebasestorage.app",
+        messagingSenderId: "354814109895",
+        appId: "1:354814109895:web:0fce975ddb6c180f1df6e2"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
+    async function guardarPublicacion() {
+        const comentario = pubComentario.value;
+        if (!comentario) return alert("Escribe un comentario");
 
-        /* ======================== */
-        /* GUARDAR PUBLICACIÓN      */
-        /* ======================== */
-        async function guardarPublicacion() {
-            const comentario = document.getElementById("pubComentario").value;
+        await addDoc(collection(db, "publicaciones"), {
+            comentario,
+            fecha: new Date().toISOString()
+        });
 
-            if (!comentario) {
-                alert("Escribe un comentario");
-                return;
-            }
+        alert("Publicación guardada");
+        pubComentario.value = "";
+    }
 
-            await addDoc(collection(db, "publicaciones"), {
-                comentario,
-                fecha: new Date().toISOString()
-            });
-
-            alert("Publicación agregada correctamente");
-            document.getElementById("pubComentario").value = "";
+    async function guardarTestimonioAdmin() {
+        if (!testNombre.value || !testTexto.value || !testEstrellas.value) {
+            return alert("Completa todos los campos");
         }
 
+        await addDoc(collection(db, "testimonios"), {
+            nombre: testNombre.value,
+            texto: testTexto.value,
+            estrellas: parseInt(testEstrellas.value),
+            fecha: new Date().toISOString()
+        });
 
-        /* ======================== */
-        /* GUARDAR TESTIMONIO ADMIN */
-        /* ======================== */
-        async function guardarTestimonioAdmin() {
-            const nombre = document.getElementById("testNombre").value;
-            const texto = document.getElementById("testTexto").value;
-            const estrellas = document.getElementById("testEstrellas").value;
+        alert("Testimonio guardado");
+        testNombre.value = "";
+        testTexto.value = "";
+        testEstrellas.value = "";
+    }
 
-            if (!nombre || !texto || !estrellas) {
-                alert("Completa todos los campos");
-                return;
-            }
-
-            await addDoc(collection(db, "testimonios"), {
-                nombre,
-                texto,
-                estrellas: parseInt(estrellas),
-                fecha: new Date().toISOString()
-            });
-
-            alert("Testimonio guardado correctamente");
-            document.getElementById("testNombre").value = "";
-            document.getElementById("testTexto").value = "";
-            document.getElementById("testEstrellas").value = "";
-        }
-
-
-        /* ======================== */
-        /* CERRAR SESIÓN            */
-        /* ======================== */
-        function salirAdmin() {
-            signOut(auth).then(() => {
-                alert("Sesión cerrada");
-                window.location.href = "index.html";
-            });
-        }
-    </script>
+    window.salirAdmin = () => {
+        localStorage.removeItem("adminAuth");
+        window.location.href = "index.html";
+    };
+</script>
 
 </body>
 </html>
+
 

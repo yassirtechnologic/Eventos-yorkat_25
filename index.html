@@ -66,6 +66,23 @@
 
 </head>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const adminTrigger = document.getElementById("adminTrigger");
+
+    if (!adminTrigger) {
+        console.warn("adminTrigger no encontrado");
+        return;
+    }
+
+    adminTrigger.style.cursor = "pointer";
+
+    adminTrigger.addEventListener("click", () => {
+        window.location.href = "admin-login.html";
+    });
+});
+</script>
+
 <body>
 
     <!-- NAVBAR -->
@@ -358,11 +375,11 @@
         }
     </script>
 
-    <!-- FIREBASE -->
+    <!-- FIREBASE SOLO FIRESTORE (SIN AUTH) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, addDoc } 
+        from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCTHFlgEOEBXThDzdTRvk_0BwLjaTwRc7E",
@@ -375,7 +392,6 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const auth = getAuth(app);
 
         async function cargarPublicaciones() {
             const cont = document.getElementById("galeria-grid");
@@ -409,8 +425,8 @@
             });
 
             alert("¡Gracias por tu testimonio!");
-            document.getElementById("nombre").value = "";
-            document.getElementById("texto").value = "";
+            nombre.value = "";
+            texto.value = "";
             cargarTestimonios();
         }
 
@@ -431,21 +447,10 @@
             });
         }
 
-        document.getElementById("adminTrigger").addEventListener("click", () => {
-            const email = prompt("Correo administrador:");
-            const pass = prompt("Contraseña:");
-
-            signInWithEmailAndPassword(auth, email, pass)
-                .then(() => {
-                    alert("Bienvenido administrador");
-                    window.location.href = "admin.html";
-                })
-                .catch(() => alert("Acceso denegado"));
-        });
-
         cargarPublicaciones();
         cargarTestimonios();
     </script>
+
 
 <!-- MODAL TESTIMONIOS -->
 <div id="modal-testimonios" class="modal-testimonios">
