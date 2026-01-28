@@ -1,163 +1,158 @@
 /* ==========================================================
-   🔐 PROTECCIÓN GLOBAL DEL PANEL
-========================================================== */
-if (
-  window.location.pathname.includes("admin.html") &&
-  localStorage.getItem("adminAuth") !== "true"
-) {
-  window.location.href = "admin-login.html";
-}
-
-/* ==========================================================
    🔥 FIREBASE IMPORTS
 ========================================================== */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+import {
   getFirestore,
   collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc
+  addDoc
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-storage.js";
+
 /* ==========================================================
-   🔥 FIREBASE CONFIG
+   🔧 FIREBASE CONFIG
 ========================================================== */
 const firebaseConfig = {
-  apiKey: "AIzaSyB_GFvlW4hrZ1fTAz8kB-6dybi83jVRmaQ",
+  apiKey: "AIzaSyCTHFlgEOEBXThDzdTRvk_0BwLjaTwRc7E",
   authDomain: "striped-smile-475414-v0.firebaseapp.com",
   projectId: "striped-smile-475414-v0",
-  storageBucket: "striped-smile-475414-v0.appspot.com",
-  messagingSenderId: "354814109895",
-  appId: "1:354814109895:web:0fce975ddb6c180f1df6e2"
+  storageBucket: "striped-smile-475414-v0.firebasestorage.app"
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 /* ==========================================================
-   📝 PUBLICACIONES
+   🔐 PROTECCIÓN CORRECTA DEL PANEL (ANTI BUCLE)
 ========================================================== */
-export async function guardarPublicacion() {
-  const comentario = document.getElementById("pubComentario").value;
-  const archivo = document.getElementById("pubImagen")?.files[0];
+let authChecked = false;
 
-  if (!comentario) return alert("Escribe un comentario.");
+onAuthStateChanged(auth, (user) => {
+  if (authChecked) return;
+  authChecked = true;
 
-  let imagenBase64 = "";
+  if (!user) {
+    console.warn("⛔ No autenticado → redirigiendo a login");
+    window.location.replace("admin-login.html");
+  } else {
+    console.log("✅ Usuario autenticado:", user.email);
+  }
+});
 
-  if (archivo) {
-    const reader = new FileReader();
-    reader.readAsDataURL(archivo);
-    await new Promise((res) => (reader.onload = res));
-    imagenBase64 = reader.result;
+/* ==========================================================
+   🧠 DOM
+========================================================== */
+const btnGuardarPublicacion = document.getElementById("btnGuardarPublicacion");
+const btnGuardarTestimonio = document.getElementById("btnGuardarTestimonio");
+const btnSalir = document.getElementById("btnSalir");
+
+const pubComentario = document.getElementById("pubComentario");
+const pubImagen = document.getElementById("pubImagen");
+
+const testNombre = document.getElementById("testNombre");
+const testTexto = document.getElementById("testTexto");
+const testEstrellas = document.getElementById("testEstrellas");
+
+/* ==========================================================
+   📝 PUBLICACIÓN (IMAGEN + FIRESTORE)
+========================================================== */
+async function guardarPublicacion() {
+  const comentario = pubComentario.value.trim();
+  const archivo = pubImagen.files[0];
+
+  if (!comentario) {
+    alert("Escribe un comentario.");
+    return;
   }
 
-  await addDoc(collection(db, "publicaciones"), {
-    comentario,
-    img: imagenBase64,
-    fecha: new Date().toISOString()
-  });
+  try {
+    let imageUrl = "";
 
-  alert("Publicación guardada");
-  document.getElementById("pubComentario").value = "";
-  if (archivo) document.getElementById("pubImagen").value = "";
+    if (archivo) {
+      const imageRef = ref(
+        storage,
+        `publicaciones/${Date.now()}_${archivo.name}`
+      );
+      await uploadBytes(imageRef, archivo);
+      imageUrl = await getDownloadURL(imageRef);
+    }
 
-  mostrarPublicaciones();
+    await addDoc(collection(db, "publicaciones"), {
+      comentario,
+      imageUrl,
+      fecha: new Date().toISOString()
+    });
+
+    alert("✅ Publicación guardada");
+    pubComentario.value = "";
+    pubImagen.value = "";
+
+  } catch (error) {
+    console.error("❌ ERROR PUBLICACIÓN:", error);
+    alert("Error al guardar publicación");
+  }
 }
 
 /* ==========================================================
-   💬 TESTIMONIOS
+   💬 TESTIMONIO
 ========================================================== */
-export async function guardarTestimonioAdmin() {
-  const nombre = testNombre.value;
-  const texto = testTexto.value;
+async function guardarTestimonioAdmin() {
+  const nombre = testNombre.value.trim();
+  const texto = testTexto.value.trim();
   const estrellas = testEstrellas.value;
 
-  if (!nombre || !texto || !estrellas)
-    return alert("Completa todos los campos");
+  if (!nombre || !texto || !estrellas) {
+    alert("Completa todos los campos");
+    return;
+  }
 
-  await addDoc(collection(db, "testimonios"), {
-    nombre,
-    texto,
-    estrellas: parseInt(estrellas),
-    fecha: new Date().toISOString()
-  });
+  try {
+    await addDoc(collection(db, "testimonios"), {
+      nombre,
+      texto,
+      estrellas: parseInt(estrellas),
+      fecha: new Date().toISOString()
+    });
 
-  alert("Testimonio guardado");
-  testNombre.value = "";
-  testTexto.value = "";
-  testEstrellas.value = "";
+    alert("✅ Testimonio guardado");
+    testNombre.value = "";
+    testTexto.value = "";
+    testEstrellas.value = "";
 
-  mostrarTestimonios();
+  } catch (error) {
+    console.error("❌ ERROR TESTIMONIO:", error);
+    alert("Error al guardar testimonio");
+  }
 }
 
 /* ==========================================================
-   👁 MOSTRAR PUBLICACIONES
+   🔘 EVENTOS
 ========================================================== */
-export async function mostrarPublicaciones() {
-  const cont = document.getElementById("adminListaPublicaciones");
-  if (!cont) return;
+btnGuardarPublicacion?.addEventListener("click", guardarPublicacion);
+btnGuardarTestimonio?.addEventListener("click", guardarTestimonioAdmin);
 
-  cont.innerHTML = "";
-  const snap = await getDocs(collection(db, "publicaciones"));
+btnSalir?.addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.replace("index.html");
+});
 
-  snap.forEach((d) => {
-    const p = d.data();
 
-    cont.innerHTML += `
-      <div class="admin-card">
-        ${p.img ? `<img src="${p.img}" class="admin-img">` : ""}
-        <p>${p.comentario}</p>
-        <small>${new Date(p.fecha).toLocaleString()}</small>
-        <button class="btn-delete" onclick="eliminarPublicacion('${d.id}')">
-          Eliminar
-        </button>
-      </div>
-    `;
-  });
-}
 
-/* ==========================================================
-   👁 MOSTRAR TESTIMONIOS
-========================================================== */
-export async function mostrarTestimonios() {
-  const cont = document.getElementById("adminListaTestimonios");
-  if (!cont) return;
 
-  cont.innerHTML = "";
-  const snap = await getDocs(collection(db, "testimonios"));
 
-  snap.forEach((d) => {
-    const t = d.data();
 
-    cont.innerHTML += `
-      <div class="admin-card">
-        <h4>${t.nombre}</h4>
-        <p>${t.texto}</p>
-        <p>⭐ ${t.estrellas}</p>
-        <small>${new Date(t.fecha).toLocaleString()}</small>
-        <button class="btn-delete" onclick="eliminarTestimonio('${d.id}')">
-          Eliminar
-        </button>
-      </div>
-    `;
-  });
-}
-
-/* ==========================================================
-   🗑 ELIMINAR
-========================================================== */
-window.eliminarPublicacion = async (id) => {
-  if (!confirm("¿Eliminar publicación?")) return;
-  await deleteDoc(doc(db, "publicaciones", id));
-  mostrarPublicaciones();
-};
-
-window.eliminarTestimonio = async (id) => {
-  if (!confirm("¿Eliminar testimonio?")) return;
-  await deleteDoc(doc(db, "testimonios", id));
-  mostrarTestimonios();
-};
 

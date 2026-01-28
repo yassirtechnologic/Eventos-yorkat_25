@@ -278,9 +278,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <!-- GALERÍA -->
         <section id="galeria" class="galeria">
-            <h2 class="fade-up" data-translate="galeriaTitle">Publicaciones</h2>
-            <div id="galeria-grid" class="galeria-grid"></div>
+        <h2 class="fade-up" data-translate="galeriaTitle">Publicaciones</h2>
+        <div id="galeria-grid" class="galeria-grid"></div>
         </section>
+
+        <!-- MODAL ZOOM -->
+        <div id="galeriaModal" class="galeria-modal">
+        <span id="cerrarModal" class="galeria-cerrar">×</span>
+        <img id="modalImg" />
+        <p id="modalTexto"></p>
+        </div>
+
 
         <!-- CARTA -->
         <section id="carta" class="carta">
@@ -355,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
 
     <!-- SCRIPTS -->
-    <script src="admin.js"></script>
+    <script type="module" src="galeria.js"></script>
     <script src="translations.js"></script>
     <script src="lang.js"></script>
 
@@ -374,83 +382,6 @@ document.addEventListener("DOMContentLoaded", () => {
             mobileMenu.classList.remove("open");
         }
     </script>
-
-    <!-- FIREBASE SOLO FIRESTORE (SIN AUTH) -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, addDoc } 
-        from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCTHFlgEOEBXThDzdTRvk_0BwLjaTwRc7E",
-            authDomain: "striped-smile-475414-v0.firebaseapp.com",
-            projectId: "striped-smile-475414-v0",
-            storageBucket: "striped-smile-475414-v0.firebasestorage.app",
-            messagingSenderId: "354814109895",
-            appId: "1:354814109895:web:0fce975ddb6c180f1df6e2"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        async function cargarPublicaciones() {
-            const cont = document.getElementById("galeria-grid");
-            cont.innerHTML = "";
-
-            const querySnapshot = await getDocs(collection(db, "publicaciones"));
-            querySnapshot.forEach((doc) => {
-                cont.innerHTML += `
-                    <div class="galeria-item fade-up">
-                        <p style="color:white;">${doc.data().comentario}</p>
-                    </div>
-                `;
-            });
-        }
-
-        async function guardarTestimonio() {
-            const nombre = document.getElementById("nombre").value;
-            const texto = document.getElementById("texto").value;
-            const estrellas = document.getElementById("estrellas").value;
-
-            if (!nombre || !texto) {
-                alert("Completa todos los campos");
-                return;
-            }
-
-            await addDoc(collection(db, "testimonios"), {
-                nombre,
-                texto,
-                estrellas: parseInt(estrellas),
-                fecha: new Date().toISOString()
-            });
-
-            alert("¡Gracias por tu testimonio!");
-            nombre.value = "";
-            texto.value = "";
-            cargarTestimonios();
-        }
-
-        async function cargarTestimonios() {
-            const cont = document.getElementById("testimonios-grid");
-            cont.innerHTML = "";
-
-            const querySnapshot = await getDocs(collection(db, "testimonios"));
-            querySnapshot.forEach((doc) => {
-                const d = doc.data();
-                cont.innerHTML += `
-                    <div class="testimonio-card fade-up">
-                        <h4 style="color:white;">${d.nombre}</h4>
-                        <p style="color:white;">“${d.texto}”</p>
-                        <p class="estrellas">⭐ ${d.estrellas}</p>
-                    </div>
-                `;
-            });
-        }
-
-        cargarPublicaciones();
-        cargarTestimonios();
-    </script>
-
 
 <!-- MODAL TESTIMONIOS -->
 <div id="modal-testimonios" class="modal-testimonios">
