@@ -317,8 +317,18 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="formulario-testimonio fade-up">
                 <h3 data-translate="testimonioForm">Escribe tu experiencia</h3>
 
-                <input type="text" id="nombre" placeholder="Tu nombre" data-translate-placeholder="placeholderNombre">
-                <textarea id="texto" placeholder="Tu testimonio" data-translate-placeholder="placeholderTestimonio"></textarea>
+                <input
+                    type="text"
+                    id="nombre"
+                    placeholder="Tu nombre"
+                    data-translate-placeholder="placeholderNombre"
+                >
+
+                <textarea
+                    id="texto"
+                    placeholder="Tu testimonio"
+                    data-translate-placeholder="placeholderTestimonio"
+                ></textarea>
 
                 <select id="estrellas">
                     <option value="5">⭐⭐⭐⭐⭐ (5)</option>
@@ -326,18 +336,32 @@ document.addEventListener("DOMContentLoaded", () => {
                     <option value="3">⭐⭐⭐ (3)</option>
                 </select>
 
-                <button onclick="guardarTestimonio()" class="btn" data-translate="btnEnviarTestimonio">
+                <button
+                    onclick="guardarTestimonio()"
+                    class="btn"
+                    data-translate="btnEnviarTestimonio"
+                >
                     Enviar testimonio
+                </button>
+
+                <!-- BOTÓN TOGGLE -->
+                <button
+                    id="toggle-testimonios"
+                    class="btn btn-ver-testimonios"
+                    onclick="toggleTestimonios()"
+                >
+                    Ver todos los comentarios
                 </button>
             </div>
 
-            <div id="testimonios-grid" class="testimonios-grid"></div>
-            
-            <button class="btn btn-ver-testimonios" onclick="abrirTestimonios()">
-            Ver todos los comentarios
-        </button>
-
+            <!-- GRID TESTIMONIOS -->
+            <div
+                id="testimonios-grid"
+                class="testimonios-grid"
+                style="display: none;"
+            ></div>
         </section>
+
 
         <!-- CONTACTO -->
         <section id="contacto" class="contacto">
@@ -366,6 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <script type="module" src="galeria.js"></script>
     <script src="translations.js"></script>
     <script src="lang.js"></script>
+    <script type="module" src="testimonios.js"></script>
 
     <!-- MENÚ HAMBURGUESA -->
     <script>

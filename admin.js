@@ -2,6 +2,7 @@
    🔥 FIREBASE IMPORTS
 ========================================================== */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+
 import {
   getAuth,
   onAuthStateChanged,
@@ -11,7 +12,12 @@ import {
 import {
   getFirestore,
   collection,
-  addDoc
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  query,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 import {
@@ -20,6 +26,12 @@ import {
   uploadBytes,
   getDownloadURL
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-storage.js";
+
+import {
+  deleteDoc,
+  doc,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 /* ==========================================================
    🔧 FIREBASE CONFIG
@@ -37,7 +49,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 /* ==========================================================
-   🔐 PROTECCIÓN CORRECTA DEL PANEL (ANTI BUCLE)
+   🔐 PROTECCIÓN PANEL ADMIN
 ========================================================== */
 let authChecked = false;
 
@@ -46,10 +58,10 @@ onAuthStateChanged(auth, (user) => {
   authChecked = true;
 
   if (!user) {
-    console.warn("⛔ No autenticado → redirigiendo a login");
+    console.warn("⛔ No autenticado → login");
     window.location.replace("admin-login.html");
   } else {
-    console.log("✅ Usuario autenticado:", user.email);
+    console.log("✅ Admin autenticado:", user.email);
   }
 });
 
@@ -67,15 +79,17 @@ const testNombre = document.getElementById("testNombre");
 const testTexto = document.getElementById("testTexto");
 const testEstrellas = document.getElementById("testEstrellas");
 
+const adminGrid = document.getElementById("admin-publicaciones");
+
 /* ==========================================================
-   📝 PUBLICACIÓN (IMAGEN + FIRESTORE)
+   📝 GUARDAR PUBLICACIÓN
 ========================================================== */
 async function guardarPublicacion() {
   const comentario = pubComentario.value.trim();
   const archivo = pubImagen.files[0];
 
   if (!comentario) {
-    alert("Escribe un comentario.");
+    alert("Escribe un comentario");
     return;
   }
 
@@ -97,18 +111,20 @@ async function guardarPublicacion() {
       fecha: new Date().toISOString()
     });
 
-    alert("✅ Publicación guardada");
     pubComentario.value = "";
     pubImagen.value = "";
 
-  } catch (error) {
-    console.error("❌ ERROR PUBLICACIÓN:", error);
+    cargarPublicacionesAdmin();
+    alert("✅ Publicación guardada");
+
+  } catch (err) {
+    console.error("❌ Error publicación:", err);
     alert("Error al guardar publicación");
   }
 }
 
 /* ==========================================================
-   💬 TESTIMONIO
+   💬 GUARDAR TESTIMONIO (ADMIN)
 ========================================================== */
 async function guardarTestimonioAdmin() {
   const nombre = testNombre.value.trim();
@@ -128,15 +144,91 @@ async function guardarTestimonioAdmin() {
       fecha: new Date().toISOString()
     });
 
-    alert("✅ Testimonio guardado");
     testNombre.value = "";
     testTexto.value = "";
     testEstrellas.value = "";
 
-  } catch (error) {
-    console.error("❌ ERROR TESTIMONIO:", error);
+    alert("✅ Testimonio guardado");
+
+  } catch (err) {
+    console.error("❌ Error testimonio:", err);
     alert("Error al guardar testimonio");
   }
+}
+
+/* ===========================
+   🗑 CARGAR TESTIMONIOS ADMIN
+=========================== */
+async function cargarTestimoniosAdmin() {
+  const contenedor = document.getElementById("testimoniosAdmin");
+  contenedor.innerHTML = "";
+
+  const snap = await getDocs(collection(db, "testimonios"));
+
+  snap.forEach(d => {
+    const t = d.data();
+
+    const div = document.createElement("div");
+    div.className = "testimonio-admin-card";
+    div.innerHTML = `
+      <p><strong>${t.nombre}</strong></p>
+      <p>${t.texto}</p>
+      <button class="btn-eliminar">Eliminar</button>
+    `;
+
+    div.querySelector("button").onclick = async () => {
+      if (!confirm("¿Eliminar este testimonio?")) return;
+      await deleteDoc(doc(db, "testimonios", d.id));
+      cargarTestimoniosAdmin();
+    };
+
+    contenedor.appendChild(div);
+  });
+}
+
+/* ==========================================================
+   🗑️ LISTAR + ELIMINAR PUBLICACIONES (ADMIN)
+========================================================== */
+async function cargarPublicacionesAdmin() {
+  if (!adminGrid) return;
+
+  adminGrid.innerHTML = "";
+
+  const q = query(
+    collection(db, "publicaciones"),
+    orderBy("fecha", "desc")
+  );
+
+  const snapshot = await getDocs(q);
+
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    if (!data || !data.imageUrl) return;
+
+    const card = document.createElement("div");
+    card.className = "admin-card";
+
+    card.innerHTML = `
+      <img src="${data.imageUrl}">
+      <p>${data.comentario || ""}</p>
+      <button class="btn-delete">🗑 Eliminar</button>
+    `;
+
+    card.querySelector(".btn-delete").addEventListener("click", async () => {
+      const ok = confirm("¿Eliminar esta publicación?");
+      if (!ok) return;
+
+      try {
+        await deleteDoc(doc(db, "publicaciones", docSnap.id));
+        cargarPublicacionesAdmin();
+      } catch (err) {
+        console.error("❌ Error eliminando:", err);
+        alert("No se pudo eliminar");
+      }
+    });
+
+    adminGrid.appendChild(card);
+  });
 }
 
 /* ==========================================================
@@ -149,6 +241,12 @@ btnSalir?.addEventListener("click", async () => {
   await signOut(auth);
   window.location.replace("index.html");
 });
+
+/* ==========================================================
+   🚀 INIT
+========================================================== */
+cargarPublicacionesAdmin();
+
 
 
 
