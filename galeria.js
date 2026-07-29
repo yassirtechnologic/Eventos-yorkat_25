@@ -11,6 +11,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 import { abrirLightbox } from "./lightbox.js";
+import { compartirPublicacion } from "./share.js";
 
 /* =====================================================
    🔧 CONFIG
@@ -119,58 +120,36 @@ if (data.imageUrl) {
 
     }
 
+    /* =====================================================
+    ACCIONES
+    ===================================================== */
+
+    const acciones = document.createElement("div");
+
+    acciones.className = "galeria-acciones";
+
+    const compartir = document.createElement("button");
+
+    compartir.className = "btn-compartir";
+
+    compartir.innerHTML = "📤 Compartir";
+
+    compartir.addEventListener("click", () => {
+
+        compartirPublicacion(window.location.href);
+
+    });
+
+    acciones.appendChild(compartir);
+
+    card.appendChild(acciones);
+
     grid.appendChild(card);
 
     });
 
-}
-
-/* =====================================================
-   COMPARTIR
-===================================================== */
-
-const compartir = document.createElement("button");
-
-compartir.className = "btn-compartir";
-
-compartir.innerHTML = "📤 Compartir";
-
-compartir.addEventListener("click", async () => {
-
-    const url = window.location.href;
-
-    if (navigator.share) {
-
-        try {
-
-            await navigator.share({
-
-                title: "Eventos York & Katy",
-
-                text: "Mira esta publicación de Eventos York & Katy",
-
-                url
-
-            });
-
-        } catch (error) {
-
-            console.log("Compartir cancelado");
-
-        }
-
-    } else {
-
-        await navigator.clipboard.writeText(url);
-
-        alert("✅ Enlace copiado al portapapeles.");
-
     }
 
-});
-
-card.appendChild(compartir);
-
-cargarPublicaciones();
+    cargarPublicaciones();
 
 

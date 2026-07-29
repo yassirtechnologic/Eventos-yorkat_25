@@ -1315,6 +1315,46 @@ footer {
 
 }
 
+/* =====================================================
+   ACCIONES GALERÍA
+===================================================== */
+
+.galeria-acciones{
+
+    margin-top:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.btn-compartir{
+
+    border:none;
+
+    background:transparent;
+
+    color:#ffffff;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.btn-compartir:hover{
+
+    transform:scale(1.05);
+
+    opacity:.8;
+
+}
+
 
 
 
