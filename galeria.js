@@ -54,13 +54,39 @@ async function cargarPublicaciones() {
     const card = document.createElement("div");
     card.className = "galeria-item";
 
-    // Imagen (solo si existe)
+    // Imagen o Video
     if (data.imageUrl) {
-      const img = document.createElement("img");
-      img.src = data.imageUrl;
-      img.alt = "Publicación";
-      img.loading = "lazy";
-      card.appendChild(img);
+
+      const esVideo =
+        data.tipo === "video" ||
+        data.imageUrl.toLowerCase().includes(".mp4") ||
+        data.imageUrl.toLowerCase().includes(".mov") ||
+        data.imageUrl.toLowerCase().includes(".webm");
+
+      if (esVideo) {
+
+        const video = document.createElement("video");
+
+        video.src = data.imageUrl;
+        video.controls = true;
+        video.playsInline = true;
+        video.preload = "metadata";
+        video.className = "galeria-video";
+
+        card.appendChild(video);
+
+      } else {
+
+        const img = document.createElement("img");
+
+        img.src = data.imageUrl;
+        img.alt = "Publicación";
+        img.loading = "lazy";
+        img.className = "galeria-img";
+
+        card.appendChild(img);
+
+      }
     }
 
     // Texto (solo si existe)
