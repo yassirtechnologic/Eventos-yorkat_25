@@ -57,35 +57,37 @@ async function cargarPublicaciones() {
     card.className = "galeria-item";
 
     // Imagen o Video
-    if (data.imageUrl) {
+if (data.imageUrl) {
 
-      const esVideo =
+    const esVideo =
         data.tipo === "video" ||
         data.imageUrl.toLowerCase().includes(".mp4") ||
         data.imageUrl.toLowerCase().includes(".mov") ||
         data.imageUrl.toLowerCase().includes(".webm");
 
-      if (esVideo) {
+    if (esVideo) {
 
         const video = document.createElement("video");
 
         video.src = data.imageUrl;
-        video.controls = true;
+        video.muted = true;
+        video.autoplay = true;
+        video.loop = true;
         video.playsInline = true;
         video.preload = "metadata";
+        video.controls = false;
         video.className = "galeria-video";
         video.style.cursor = "pointer";
 
-        video.addEventListener("click", (e) => {
-
-            e.preventDefault();
+        video.addEventListener("click", () => {
 
             abrirLightbox("video", data.imageUrl);
 
         });
+
         card.appendChild(video);
 
-      } else {
+    } else {
 
         const img = document.createElement("img");
 
@@ -103,18 +105,24 @@ async function cargarPublicaciones() {
 
         card.appendChild(img);
 
-      }
     }
+}
 
-    // Texto (solo si existe)
-    if (data.comentario) {
-      const p = document.createElement("p");
-      p.textContent = data.comentario;
-      card.appendChild(p);
-    }
+// Texto (solo si existe)
+if (data.comentario) {
 
-    grid.appendChild(card);
-  });
+    const p = document.createElement("p");
+
+    p.textContent = data.comentario;
+
+    card.appendChild(p);
+
+}
+
+grid.appendChild(card);
+
+});
+
 }
 
 cargarPublicaciones();
