@@ -1,3 +1,4 @@
+console.log("🔥 ADMIN JS CARGADO");
 /* ==========================================================
    🔥 FIREBASE IMPORTS
 ========================================================== */
@@ -26,12 +27,6 @@ import {
   uploadBytes,
   getDownloadURL
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-storage.js";
-
-import {
-  deleteDoc,
-  doc,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 /* ==========================================================
    🔧 FIREBASE CONFIG
