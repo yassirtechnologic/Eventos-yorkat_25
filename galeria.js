@@ -10,6 +10,8 @@ import {
   orderBy
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
+import { abrirLightbox } from "./lightbox.js";
+
 /* =====================================================
    🔧 CONFIG
 ===================================================== */
@@ -72,7 +74,15 @@ async function cargarPublicaciones() {
         video.playsInline = true;
         video.preload = "metadata";
         video.className = "galeria-video";
+        video.style.cursor = "pointer";
 
+        video.addEventListener("click", (e) => {
+
+            e.preventDefault();
+
+            abrirLightbox("video", data.imageUrl);
+
+        });
         card.appendChild(video);
 
       } else {
@@ -83,6 +93,13 @@ async function cargarPublicaciones() {
         img.alt = "Publicación";
         img.loading = "lazy";
         img.className = "galeria-img";
+        img.style.cursor = "pointer";
+
+        img.addEventListener("click", () => {
+
+            abrirLightbox("imagen", data.imageUrl);
+
+        });
 
         card.appendChild(img);
 
