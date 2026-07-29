@@ -108,22 +108,68 @@ if (data.imageUrl) {
     }
 }
 
-// Texto (solo si existe)
-if (data.comentario) {
+    // Texto (solo si existe)
+    if (data.comentario) {
 
-    const p = document.createElement("p");
+        const p = document.createElement("p");
 
-    p.textContent = data.comentario;
+        p.textContent = data.comentario;
 
-    card.appendChild(p);
+        card.appendChild(p);
+
+    }
+
+    grid.appendChild(card);
+
+    });
 
 }
 
-grid.appendChild(card);
+/* =====================================================
+   COMPARTIR
+===================================================== */
+
+const compartir = document.createElement("button");
+
+compartir.className = "btn-compartir";
+
+compartir.innerHTML = "📤 Compartir";
+
+compartir.addEventListener("click", async () => {
+
+    const url = window.location.href;
+
+    if (navigator.share) {
+
+        try {
+
+            await navigator.share({
+
+                title: "Eventos York & Katy",
+
+                text: "Mira esta publicación de Eventos York & Katy",
+
+                url
+
+            });
+
+        } catch (error) {
+
+            console.log("Compartir cancelado");
+
+        }
+
+    } else {
+
+        await navigator.clipboard.writeText(url);
+
+        alert("✅ Enlace copiado al portapapeles.");
+
+    }
 
 });
 
-}
+card.appendChild(compartir);
 
 cargarPublicaciones();
 

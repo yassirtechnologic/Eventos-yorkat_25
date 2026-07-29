@@ -1277,6 +1277,44 @@ footer {
 
 }
 
+/* =====================================================
+   BOTÓN COMPARTIR
+===================================================== */
+
+.btn-compartir{
+
+    width:100%;
+
+    margin-top:12px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    background:#ff6b35;
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.btn-compartir:hover{
+
+    background:#e85d2d;
+
+    transform:translateY(-2px);
+
+}
+
 
 
 
