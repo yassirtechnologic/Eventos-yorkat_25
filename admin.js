@@ -68,7 +68,8 @@ const btnGuardarTestimonio = document.getElementById("btnGuardarTestimonio");
 const btnSalir = document.getElementById("btnSalir");
 
 const pubComentario = document.getElementById("pubComentario");
-const pubImagen = document.getElementById("pubImagen");
+const pubArchivo = document.getElementById("pubArchivo");
+const tipoPublicacion = document.getElementById("tipoPublicacion");
 
 const testNombre = document.getElementById("testNombre");
 const testTexto = document.getElementById("testTexto");
@@ -81,7 +82,10 @@ const adminGrid = document.getElementById("admin-publicaciones");
 ========================================================== */
 async function guardarPublicacion() {
   const comentario = pubComentario.value.trim();
-  const archivo = pubImagen.files[0];
+
+  const archivo = pubArchivo.files[0];
+
+  const tipo = tipoPublicacion.value;
 
   if (!comentario) {
     alert("Escribe un comentario");
@@ -92,10 +96,14 @@ async function guardarPublicacion() {
     let imageUrl = "";
 
     if (archivo) {
-      const imageRef = ref(
+      const carpeta = tipo === "video"
+    ? "videos"
+    : "publicaciones";
+
+    const imageRef = ref(
         storage,
-        `publicaciones/${Date.now()}_${archivo.name}`
-      );
+        `${carpeta}/${Date.now()}_${archivo.name}`
+    );
       await uploadBytes(imageRef, archivo);
       imageUrl = await getDownloadURL(imageRef);
     }
@@ -107,7 +115,7 @@ async function guardarPublicacion() {
     });
 
     pubComentario.value = "";
-    pubImagen.value = "";
+    pubArchivo.value = "";
 
     cargarPublicacionesAdmin();
     alert("✅ Publicación guardada");
@@ -132,12 +140,17 @@ async function guardarTestimonioAdmin() {
   }
 
   try {
-    await addDoc(collection(db, "testimonios"), {
-      nombre,
-      texto,
-      estrellas: parseInt(estrellas),
+    await addDoc(collection(db, "publicaciones"), {
+
+      comentario,
+
+      imageUrl,
+
+      tipo,
+
       fecha: new Date().toISOString()
-    });
+
+  });
 
     testNombre.value = "";
     testTexto.value = "";

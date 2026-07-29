@@ -84,7 +84,23 @@
   <h3>Agregar Nueva Publicación</h3>
   <input type="text" id="pubComentario" placeholder="Comentario de la publicación">
 
-  <input type="file" id="pubImagen" accept="image/*">
+  <label>Tipo de publicación</label>
+
+  <select id="tipoPublicacion">
+
+      <option value="imagen">🖼 Imagen</option>
+
+      <option value="video">🎥 Reel</option>
+
+  </select>
+
+  <br><br>
+
+  <input
+      type="file"
+      id="pubArchivo"
+      accept="image/*,video/mp4,video/webm,video/quicktime"
+  >
 
   <br>
   <button
