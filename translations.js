@@ -109,6 +109,7 @@ const translations = {
 
     /* CONTACTO */
     contactoTitulo: "Reserva tu Evento",
+    contactoDescripcion: "¿Estás organizando un cumpleaños, boda, evento corporativo o una celebración especial? Estaremos encantados de ayudarte a hacer realidad tu evento.",
     whatsapp: "WhatsApp: +34 666 03 09 23",
     emailEs: "Email : eventosyorkat@gmail.com",
     locEs: "📍 Mallorca, España",
