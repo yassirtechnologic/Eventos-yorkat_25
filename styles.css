@@ -1315,17 +1315,21 @@ footer {
 
 }
 
-/* =====================================================
+/* ==========================================================
    ACCIONES GALERÍA
-===================================================== */
+========================================================== */
 
 .galeria-acciones{
 
-    margin-top:12px;
+    padding:14px;
 
     display:flex;
 
     justify-content:center;
+
+    align-items:center;
+
+    background:#111;
 
 }
 
@@ -1333,15 +1337,15 @@ footer {
 
     border:none;
 
-    background:transparent;
+    background:none;
 
     color:#ffffff;
-
-    cursor:pointer;
 
     font-size:15px;
 
     font-weight:600;
+
+    cursor:pointer;
 
     transition:.25s;
 
@@ -1349,9 +1353,9 @@ footer {
 
 .btn-compartir:hover{
 
-    transform:scale(1.05);
+    color:#ff6b35;
 
-    opacity:.8;
+    transform:scale(1.05);
 
 }
 

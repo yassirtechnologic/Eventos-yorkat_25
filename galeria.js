@@ -109,17 +109,6 @@ if (data.imageUrl) {
     }
 }
 
-    // Texto (solo si existe)
-    if (data.comentario) {
-
-        const p = document.createElement("p");
-
-        p.textContent = data.comentario;
-
-        card.appendChild(p);
-
-    }
-
     /* =====================================================
     ACCIONES
     ===================================================== */

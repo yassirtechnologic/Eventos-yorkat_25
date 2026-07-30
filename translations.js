@@ -110,8 +110,7 @@ const translations = {
     /* CONTACTO */
     contactoTitulo: "Reserva tu Evento",
     whatsapp: "WhatsApp: +34 666 03 09 23",
-    emailEs: "Email España: mquintana2111@gmail.com",
-    emailNi: "Email Nicaragua: yorkat@gmail.com",
+    emailEs: "Email : eventosyorkat@gmail.com",
     locEs: "📍 Mallorca, España",
     locNi: "📍 León, Nicaragua",
 
