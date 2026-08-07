@@ -1,162 +1,278 @@
 /* =====================================================
-   🔥 FIREBASE (LECTURA DE PUBLICACIONES)
+🔥 FIREBASE (LECTURA DE PUBLICACIONES)
 ===================================================== */
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+
 import {
-  getFirestore,
-  collection,
-  getDocs,
-  query,
-  orderBy
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    orderBy
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 import { abrirLightbox } from "./lightbox.js";
 import { compartirPublicacion } from "./share.js";
 
+
 /* =====================================================
-   🔧 CONFIG
+🔧 CONFIG
 ===================================================== */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCTHFlgEOEBXThDzdTRvk_0BwLjaTwRc7E",
-  authDomain: "striped-smile-475414-v0.firebaseapp.com",
-  projectId: "striped-smile-475414-v0",
+
+    apiKey: "AIzaSyCTHFlgEOEBXThDzdTRvk_0BwLjaTwRc7E",
+
+    authDomain: "striped-smile-475414-v0.firebaseapp.com",
+
+    projectId: "striped-smile-475414-v0",
+
 };
 
+
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
 
+
 /* =====================================================
-   🖼️ GALERÍA
+🖼️ GALERÍA
 ===================================================== */
+
 const grid = document.getElementById("galeria-grid");
 
+
 async function cargarPublicaciones() {
-  if (!grid) return;
 
-  grid.innerHTML = "";
+    if (!grid) return;
 
-  const q = query(
-    collection(db, "publicaciones"),
-    orderBy("fecha", "desc")
-  );
+    grid.innerHTML = "";
 
-  const snapshot = await getDocs(q);
 
-  if (snapshot.empty) {
-    grid.innerHTML = "<p>No hay publicaciones aún</p>";
-    return;
-  }
+    const q = query(
 
-  snapshot.forEach((doc) => {
-    const data = doc.data();
+        collection(db, "publicaciones"),
 
-    // 🔒 VALIDACIONES CLAVE (evitan /undefined)
-    if (!data) return;
-    if (!data.imageUrl && !data.comentario) return;
+        orderBy("fecha", "desc")
 
-    const card = document.createElement("div");
-    card.className = "galeria-item";
+    );
 
-    // Imagen o Video
-if (data.imageUrl) {
 
-    const esVideo =
-        data.tipo === "video" ||
-        data.imageUrl.toLowerCase().includes(".mp4") ||
-        data.imageUrl.toLowerCase().includes(".mov") ||
-        data.imageUrl.toLowerCase().includes(".webm");
+    const snapshot = await getDocs(q);
 
-    if (esVideo) {
 
-        const video = document.createElement("video");
+    if (snapshot.empty) {
 
-        video.src = data.imageUrl;
-        video.muted = true;
-        video.autoplay = true;
-        video.loop = true;
-        video.playsInline = true;
-        video.preload = "metadata";
-        video.controls = false;
-        video.className = "galeria-video";
-        video.style.cursor = "pointer";
+        grid.innerHTML = "No hay publicaciones aún";
 
-        video.addEventListener("click", () => {
-
-            abrirLightbox("video", data.imageUrl);
-
-        });
-
-        card.appendChild(video);
-
-    } else {
-
-        const img = document.createElement("img");
-
-        img.src = data.imageUrl;
-        img.alt = "Publicación";
-        img.loading = "lazy";
-        img.className = "galeria-img";
-        img.style.cursor = "pointer";
-
-        img.addEventListener("click", () => {
-
-            abrirLightbox("imagen", data.imageUrl);
-
-        });
-
-        card.appendChild(img);
+        return;
 
     }
+
+
+    snapshot.forEach((doc) => {
+
+        const data = doc.data();
+
+
+        // 🔒 VALIDACIONES CLAVE (evitan /undefined)
+
+        if (!data) return;
+
+        if (!data.imageUrl && !data.comentario) return;
+
+
+        const card = document.createElement("div");
+
+        card.className = "galeria-item";
+
+
+        /* =====================================================
+        IMAGEN O VIDEO
+        ===================================================== */
+
+        if (data.imageUrl) {
+
+            const esVideo =
+
+                data.tipo === "video" ||
+
+                data.imageUrl.toLowerCase().includes(".mp4") ||
+
+                data.imageUrl.toLowerCase().includes(".mov") ||
+
+                data.imageUrl.toLowerCase().includes(".webm");
+
+
+            /* =================================================
+            VIDEO
+            ================================================= */
+
+            if (esVideo) {
+
+                const video = document.createElement("video");
+
+
+                video.src = data.imageUrl;
+
+                video.muted = true;
+
+                video.autoplay = true;
+
+                video.loop = true;
+
+                video.playsInline = true;
+
+                video.preload = "metadata";
+
+                video.controls = false;
+
+                video.className = "galeria-video";
+
+                video.style.cursor = "pointer";
+
+
+                video.addEventListener("click", () => {
+
+                    abrirLightbox(
+                        "video",
+                        data.imageUrl
+                    );
+
+                });
+
+
+                card.appendChild(video);
+
+
+            /* =================================================
+            IMAGEN
+            ================================================= */
+
+            } else {
+
+                const img = document.createElement("img");
+
+
+                img.src = data.imageUrl;
+
+                img.alt = "Publicación";
+
+                img.loading = "lazy";
+
+                img.className = "galeria-img";
+
+                img.style.cursor = "pointer";
+
+
+                img.addEventListener("click", () => {
+
+                    abrirLightbox(
+                        "imagen",
+                        data.imageUrl
+                    );
+
+                });
+
+
+                card.appendChild(img);
+
+            }
+
+        }
+
+
+        /* =====================================================
+        ACCIONES
+        ===================================================== */
+
+        const acciones = document.createElement("div");
+
+        acciones.className = "galeria-acciones";
+
+
+        const compartir = document.createElement("button");
+
+        compartir.className = "btn-compartir";
+
+        compartir.innerHTML = "📤 Compartir";
+
+
+        compartir.addEventListener("click", () => {
+
+            compartirPublicacion(
+                window.location.href
+            );
+
+        });
+
+
+        acciones.appendChild(compartir);
+
+        card.appendChild(acciones);
+
+        grid.appendChild(card);
+
+    });
+
 }
 
-    /* =====================================================
-    ACCIONES
-    ===================================================== */
-
-    const acciones = document.createElement("div");
-
-    acciones.className = "galeria-acciones";
-
-    const compartir = document.createElement("button");
-
-    compartir.className = "btn-compartir";
-
-    compartir.innerHTML = "📤 Compartir";
-
-    compartir.addEventListener("click", () => {
-
-        compartirPublicacion(window.location.href);
-
-    });
-
-    acciones.appendChild(compartir);
-
-    card.appendChild(acciones);
-
-    grid.appendChild(card);
-
-    });
-
-    }
-
-    cargarPublicaciones();
 
 /* =====================================================
 🍽️ LIGHTBOX — CARTA DE COMIDA
 ===================================================== */
 
-const imagenesCarta = document.querySelectorAll(".carta-img");
+function activarLightboxCarta() {
 
-imagenesCarta.forEach((imagen) => {
+    const imagenesCarta =
+        document.querySelectorAll(".carta-img");
 
-    // Indica visualmente que la imagen se puede ampliar
-    imagen.style.cursor = "zoom-in";
 
-    imagen.addEventListener("click", () => {
+    imagenesCarta.forEach((imagen) => {
 
-        abrirLightbox("imagen", imagen.src);
+        // Cursor visual de ampliación
+
+        imagen.style.cursor = "zoom-in";
+
+
+        // Abrir imagen en Lightbox
+
+        imagen.addEventListener("click", () => {
+
+            abrirLightbox(
+                "imagen",
+                imagen.src
+            );
+
+        });
 
     });
 
-});
+}
+
+
+/* =====================================================
+🚀 INICIALIZACIÓN
+===================================================== */
+
+// Cargar publicaciones desde Firebase
+
+cargarPublicaciones();
+
+
+// Activar Lightbox de la Carta cuando el DOM esté listo
+
+if (document.readyState === "loading") {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        activarLightboxCarta
+    );
+
+} else {
+
+    activarLightboxCarta();
+
+}
 
