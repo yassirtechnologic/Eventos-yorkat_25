@@ -1168,129 +1168,184 @@ footer {
 }
 
 /* ==========================================================
-   LIGHTBOX
+   YASSIR TECH
+   LIGHTBOX — IMÁGENES Y VIDEOS
 ========================================================== */
 
-#lightbox{
+#lightbox {
+    position: fixed;
+    inset: 0;
 
-    position:fixed;
+    background: rgba(0, 0, 0, 0.92);
 
-    inset:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    background:rgba(0,0,0,.92);
+    padding: 70px 20px 30px;
 
-    display:flex;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 
-    justify-content:center;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 
-    align-items:center;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.30s;
-
-    z-index:99999;
-
+    z-index: 99999;
 }
 
-#lightbox.open{
 
-    opacity:1;
+/* ==========================================================
+   LIGHTBOX ABIERTO
+========================================================== */
 
-    visibility:visible;
-
+#lightbox.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
-.lightbox-content{
 
-    position:relative;
+/* ==========================================================
+   CONTENEDOR DEL CONTENIDO
+========================================================== */
 
-    width:90%;
+#lightboxBody {
+    width: 100%;
+    max-width: 1200px;
+    max-height: calc(100vh - 100px);
 
-    max-width:1200px;
-
-    max-height:90vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#lightbox img{
 
-    width:100%;
+/* ==========================================================
+   IMAGEN
+========================================================== */
 
-    max-height:90vh;
+#lightboxBody img {
+    display: block;
 
-    object-fit:contain;
+    width: auto;
+    height: auto;
 
-    border-radius:12px;
+    max-width: 95vw;
+    max-height: 85vh;
 
+    object-fit: contain;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.45);
 }
 
-#lightbox video{
 
-    width:100%;
+/* ==========================================================
+   VIDEO
+========================================================== */
 
-    max-height:90vh;
+#lightboxBody video {
+    display: block;
 
-    object-fit:contain;
+    width: auto;
+    height: auto;
 
-    border-radius:12px;
+    max-width: 95vw;
+    max-height: 85vh;
 
+    object-fit: contain;
+
+    border-radius: 12px;
+
+    background: #000;
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.45);
 }
 
-#lightboxClose{
 
-    position:absolute;
+/* ==========================================================
+   BOTÓN CERRAR
+========================================================== */
 
-    top:-55px;
+#lightboxClose {
+    position: fixed;
 
-    right:0;
+    top: 20px;
+    right: 20px;
 
-    width:46px;
+    width: 46px;
+    height: 46px;
 
-    height:46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    border:none;
+    border: none;
+    border-radius: 50%;
 
-    border-radius:50%;
+    background: #ffffff;
+    color: #111111;
 
-    background:#ffffff;
+    font-size: 22px;
+    line-height: 1;
 
-    color:#111;
+    cursor: pointer;
 
-    font-size:22px;
+    z-index: 100000;
 
-    cursor:pointer;
-
-    transition:.25s;
-
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
 }
 
-#lightboxClose:hover{
 
-    transform:scale(1.08);
-
+#lightboxClose:hover {
+    transform: scale(1.08);
 }
 
-@media(max-width:768px){
 
-    .lightbox-content{
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
 
-        width:95%;
+@media (max-width: 768px) {
 
+    #lightbox {
+        padding:
+            65px
+            12px
+            20px;
     }
 
-    #lightboxClose{
 
-        top:-48px;
+    #lightboxBody {
+        width: 100%;
+        max-height: calc(100vh - 85px);
+    }
 
+
+    #lightboxBody img,
+    #lightboxBody video {
+        max-width: 96vw;
+        max-height: 82vh;
+
+        border-radius: 8px;
+    }
+
+
+    #lightboxClose {
+        top: 12px;
+        right: 12px;
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 20px;
     }
 
 }
