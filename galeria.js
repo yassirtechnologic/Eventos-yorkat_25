@@ -141,4 +141,22 @@ if (data.imageUrl) {
 
     cargarPublicaciones();
 
+/* =====================================================
+🍽️ LIGHTBOX — CARTA DE COMIDA
+===================================================== */
+
+const imagenesCarta = document.querySelectorAll(".carta-img");
+
+imagenesCarta.forEach((imagen) => {
+
+    // Indica visualmente que la imagen se puede ampliar
+    imagen.style.cursor = "zoom-in";
+
+    imagen.addEventListener("click", () => {
+
+        abrirLightbox("imagen", imagen.src);
+
+    });
+
+});
 
